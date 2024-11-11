@@ -5,6 +5,7 @@ import {
   } from "react-router-dom";
   
 import Home from "./pages/Home";
+import Login from "./pages/Login"
 import Header from './components/Header'
 
 export default function MyRoutes() {
@@ -12,7 +13,8 @@ export default function MyRoutes() {
         <Router>
             <Header/>
             <Routes>
-                <Route exact path="/" element={<Home />} />
+                <Route path="/" element={<Home />} />
+                <Route path="login" element={<Login />} />
             </Routes>
         </Router>
     )

@@ -51,7 +51,7 @@ export default function UserTable(){
             <Modal open={error} onClose={handleError}> 
                 {error && <ErrorPage title="Um erro ocorreu!" message={error} onConfirm={handleError} />}
             </Modal>
-            <table className="center text-left table-auto min-w-max rounded">
+            <table className="center text-left table-auto min-w-max rounded min-w-[121px] sm:min-w-[185px] md:min-w-[739px]">
                 <thead>
                     <tr>
                         <th className="p-2 md:p-4 border-b border-slate-300 bg-slate-50">Nome</th>
@@ -62,7 +62,9 @@ export default function UserTable(){
                     </tr>
                 </thead>
                 <tbody>
-                    {users && users.map((user) => 
+                    {isFetching && <tr className="bg-gray-100"><td className={`${whiteRow}`} colSpan={5}><p className="text-center
+                    ">Carregando dados...</p></td></tr>}
+                    {!isFetching && users && users.length > 0 && users.map((user) => 
                         (
                             <tr key={user.id} className="bg-gray-100">
                                 <td className={`${user.id % 2 === 0 ? whiteRow: grayRow}`}>{user.name}</td>
