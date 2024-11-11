@@ -1,11 +1,14 @@
-import Header from './components/Header'
+
+
+import Routes from './MyRoutes'
+
 import './App.css'
 
 function App() {
 
-
   return (
-    <Header />
+    
+      <Routes/>
   )
 }
 

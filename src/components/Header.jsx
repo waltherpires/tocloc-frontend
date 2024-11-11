@@ -1,5 +1,6 @@
-import { IoMdMenu, IoMdClose } from "react-icons/io";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { IoMdMenu, IoMdClose } from "react-icons/io";
 
 export default function Header(){
     const [iconMenu, setIconMenu] = useState(true);
@@ -25,9 +26,9 @@ export default function Header(){
                 </div>
                 <div className={listClass}>
                     <ul className="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
-                        <li><a className="hover:text-gray-500" href="">Home</a></li>
-                        <li><a className="hover:text-gray-500" href="">Reservas</a></li>
-                        <li><a className="hover:text-gray-500" href="">Locais</a></li>
+                        <li><Link className="hover:text-gray-500" to="teste">Home</Link></li>
+                        <li><Link className="hover:text-gray-500" to="teste">Reservas</Link></li>
+                        <li><Link className="hover:text-gray-500" to="teste">Locais</Link></li>
                     </ul>
                 </div>
                 <div className="flex items-center gap-4">
