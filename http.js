@@ -8,7 +8,7 @@ export async function fetchAllUsers(){
 }
 
 export async function deleteUserById(id){
-    const response = await axios.delete(`http://localhost:8080/userss/${id}`);
+    const response = await axios.delete(`http://localhost:8080/users/${id}`);
     
     if(response.status > 300){
         throw new Error("Erro ao excluir usuário")
