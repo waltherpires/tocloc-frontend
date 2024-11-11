@@ -39,6 +39,10 @@ export default function UserTable(){
         }
     }
 
+    function handleEditUser(user){
+        window.location = `http://localhost:5173/edit/${user.id}`;
+    };
+
     function handleError() {
         setError(null);
     }
@@ -72,7 +76,7 @@ export default function UserTable(){
                                 <td className={`${user.id % 2 === 0 ? whiteRow: grayRow} hidden md:table-cell`}>{user.phoneNumber}</td>
                                 <td className={`${user.id % 2 === 0 ? whiteRow: grayRow} hidden md:table-cell`}>{user.typeOfUser}</td>
                                 <td className={`${user.id % 2 === 0 ? whiteRow: grayRow} space-x-2`}>
-                                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded">Editar</button>
+                                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-3 rounded" onClick={() => handleEditUser(user)}>Editar</button>
                                     <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-3 rounded" onClick={() => handleRemoveUser(user.id)}>Excluir</button>
                                 </td>   
                             </tr>

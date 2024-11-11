@@ -5,8 +5,9 @@ import {
   } from "react-router-dom";
   
 import Home from "./pages/Home";
-import Login from "./pages/Login"
-import Header from './components/Header'
+import Login from "./pages/Login";
+import EditUser from "./pages/EditUser";
+import Header from './components/Header';
 
 export default function MyRoutes() {
     return (
@@ -15,6 +16,7 @@ export default function MyRoutes() {
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="login" element={<Login />} />
+                <Route path="edit/:userId" element={<EditUser />} />
             </Routes>
         </Router>
     )
