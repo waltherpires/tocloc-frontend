@@ -25,3 +25,13 @@ export async function deleteUserById(id){
 
     return response.data;
 }
+
+export async function updateUser(id, body){
+    const response = await axios.put(`http://localhost:8080/users/${id}`, body);
+
+    if (response.status > 400) {
+        throw new Error("Erro ao editar usuário");
+    }
+
+    return response.data;
+} 

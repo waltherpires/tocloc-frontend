@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 
 import { deleteUserById, fetchAllUsers } from "../../http";
 import Modal from "./Modal";
-import ErrorPage from "./ErrorPage";
+import MessagePage from "./MessagePage";
 
 export default function UserTable(){
     const [isFetching, setIsFetching] = useState(false);
@@ -53,7 +53,7 @@ export default function UserTable(){
     return (
         <>
             <Modal open={error} onClose={handleError}> 
-                {error && <ErrorPage title="Um erro ocorreu!" message={error} onConfirm={handleError} />}
+                {error && <MessagePage title="Um erro ocorreu!" message={error} onConfirm={handleError} />}
             </Modal>
             <table className="center text-left table-auto min-w-max rounded min-w-[121px] sm:min-w-[185px] md:min-w-[739px]">
                 <thead>

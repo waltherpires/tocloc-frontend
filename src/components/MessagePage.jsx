@@ -1,4 +1,4 @@
-export default function ErrorPage({ title, message, onConfirm }) {
+export default function MessagePage({ title, message, onConfirm }) {
     return (
       <div className="mx-auto p-4 bg-slate-50 rounded">
         <h2 className="mb-5 text-lg font-lg text-gray-900 dark:text-gray-400">{title}</h2>
