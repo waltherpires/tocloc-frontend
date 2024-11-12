@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
 
 import { deleteUserById, fetchAllUsers } from "../../http";
+
 import Modal from "./Modal";
 import MessagePage from "./MessagePage";
+import Table from "./Table";
 
 export default function UserTable(){
     const [isFetching, setIsFetching] = useState(false);
@@ -39,23 +41,33 @@ export default function UserTable(){
         }
     }
 
-    function handleEditUser(user){
-        window.location = `http://localhost:5173/edit/${user.id}`;
+    function handleEditUser(id){
+        window.location = `http://localhost:5173/edit/${id}`;
     };
 
     function handleError() {
         setError(null);
     }
 
-    let whiteRow = 'p-2 md:p-4 border-b border-slate-300 bg-slate-50';
-    let grayRow = 'p-2 md:p-4 border-b border-slate-300 bg-gray-200';
+    // let whiteRow = 'p-2 md:p-4 border-b border-slate-300 bg-slate-50';
+    // let grayRow = 'p-2 md:p-4 border-b border-slate-300 bg-gray-200';
+
+    const userColumns = [
+        { label: 'ID', field: 'id' },
+        { label: 'Nome', field: 'name' },
+        { label: 'E-mail', field: 'email'},
+        { label: 'Telefone', field: 'phoneNumber' },
+        { label: 'Tipo de Usuário', field: 'typeOfUser' },
+    ];
 
     return (
         <>
             <Modal open={error} onClose={handleError}> 
                 {error && <MessagePage title="Um erro ocorreu!" message={error} onConfirm={handleError} />}
             </Modal>
-            <table className="center text-left table-auto min-w-max rounded min-w-[121px] sm:min-w-[185px] md:min-w-[739px]">
+            <Table columns={userColumns} data={users} clickDelete={handleRemoveUser} clickEdit={handleEditUser}/>
+ 
+            {/* <table className="center text-left table-auto min-w-max rounded min-w-[121px] sm:min-w-[185px] md:min-w-[739px]">
                 <thead>
                     <tr>
                         <th className="p-2 md:p-4 border-b border-slate-300 bg-slate-50">Nome</th>
@@ -83,7 +95,7 @@ export default function UserTable(){
                         ) 
                     )}
                 </tbody>
-            </table>
+            </table> */}
         </>
     )
 }
