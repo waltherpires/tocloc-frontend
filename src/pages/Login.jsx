@@ -1,5 +1,4 @@
 
-
 export default function Login(){
   return (
     <div className="flex justify-center items-center h-[90vh]"> 
@@ -27,9 +26,6 @@ export default function Login(){
           <button type="submit" className="border-2 py-1 rounded-md w-full font-semibold bg-neutral-500 text-white hover:bg-neutral-900" >Entrar</button>
         </div>
       </div>
-
-
     </div>
-
   )
 }

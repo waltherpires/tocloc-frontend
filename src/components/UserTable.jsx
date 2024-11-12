@@ -42,7 +42,7 @@ export default function UserTable(){
     }
 
     function handleEditUser(id){
-        window.location = `http://localhost:5173/edit/${id}`;
+        window.location = `http://localhost:5173/edituser/${id}`;
     };
 
     function handleError() {
@@ -53,7 +53,6 @@ export default function UserTable(){
     // let grayRow = 'p-2 md:p-4 border-b border-slate-300 bg-gray-200';
 
     const userColumns = [
-        { label: 'ID', field: 'id' },
         { label: 'Nome', field: 'name' },
         { label: 'E-mail', field: 'email'},
         { label: 'Telefone', field: 'phoneNumber' },

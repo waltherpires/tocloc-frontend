@@ -1,5 +1,6 @@
 import axios from "axios";
 
+// Users
 export async function fetchAllUsers(){
     const response = await axios.get('http://localhost:8080/users');
 
@@ -35,3 +36,20 @@ export async function updateUser(id, body){
 
     return response.data;
 } 
+
+// Locais
+export async function fetchAllPlaces(){
+    const response = await axios.get('http://localhost:8080/locais');
+
+    return response.data;
+}
+
+export async function fetchPlaceById(id){
+    const response = await axios.get(`http://localhost:8080/locais/${id}`);
+
+    if(response.status > 400){
+        throw new Error("Local não encontrado!")
+    }
+
+    return response.data;
+}

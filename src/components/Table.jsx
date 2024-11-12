@@ -1,7 +1,7 @@
-export default function({ columns, data, clickEdit, clickDelete }){
+export default function PlaceTable({ columns, data, clickEdit, clickDelete }){
 
   return (
-    <table className="center text-left table-auto min-w-max rounded min-w-[121px] sm:min-w-[185px] md:min-w-[739px]">
+    <table className="center text-left table-auto rounded min-w-[121px] sm:min-w-[185px] md:min-w-[739px]">
       <thead>
           <tr>
             {columns.map(
@@ -12,7 +12,12 @@ export default function({ columns, data, clickEdit, clickDelete }){
             <th className="p-2 md:p-4 border-b border-slate-300 bg-slate-50">Ações</th>
           </tr>
       </thead>
-      <tbody className="bg-gray-100"> 
+      <tbody className="bg-gray-100">
+        {data.length === 0 &&
+          <tr className="hover:bg-gray-300">
+            <td className="px-4 py-2 border-b" colSpan={columns.length + 1}><p className="text-center">Nenhuma informação foi encontrada!</p></td>
+          </tr>
+        } 
         {data.map((item, id) => 
         {
           console.log(item);

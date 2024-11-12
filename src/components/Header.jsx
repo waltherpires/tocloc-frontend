@@ -29,6 +29,7 @@ export default function Header(){
                         <li><Link className="hover:text-gray-500" to="/">Home</Link></li>
                         <li><Link className="hover:text-gray-500" to="reservas">Reservas</Link></li>
                         <li><Link className="hover:text-gray-500" to="locais">Locais</Link></li>
+                        <li><Link className="hover:text-gray-500" to="users">Usuários</Link></li>
                     </ul>
                 </div>
                 <div className="flex items-center gap-4">
