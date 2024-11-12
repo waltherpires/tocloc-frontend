@@ -13,6 +13,7 @@ export default function EditUser(){
   const [error, setError] = useState();
   const [success, setSuccess] = useState();
 
+  // carregando dados do backend
   useEffect(() =>{
       async function fetchUser(){
           setIsFetching(true);
@@ -35,6 +36,7 @@ export default function EditUser(){
       fetchUser();
   }, []);
 
+  //lidando com mudanças nos campos
   function handleInputChange(identifier, value){
     setUser((prevUser) => ({
       ...prevUser,
@@ -42,9 +44,11 @@ export default function EditUser(){
     }))
   }
 
+  // funcao para enviar o update 
   async function handleSubmit(event){
     event.preventDefault();
 
+    // checando se existem campos vazios
     const updatedUser = {
       ...user,
       name: (user.name === '' || user.name === null) ? user.originalName : user.name,
@@ -53,7 +57,18 @@ export default function EditUser(){
       typeOfUser: (user.typeOfUser === '' || user.typeOfUser === null) ? user.originalTypeOfUser : user.typeOfUser,
     }
 
+    // chechando se não houve nenhuma alteração
+    const noChange = (
+      updatedUser.name === user.originalName &&
+      updatedUser.password === user.originalPassword &&
+      updatedUser.email === user.originalEmail &&
+      updatedUser.typeOfUser === user.originalTypeOfUser
+    );
+
     try{
+      if(noChange){
+        throw new Error("Nenhum dado foi alterado!");
+      }
       await updateUser(userId, updatedUser);
       setSuccess("Usuário atualizado com sucesso");
     }catch(error){
@@ -62,10 +77,12 @@ export default function EditUser(){
     }
   }
 
+  // limpar a mensagem de erro
   function handleError() {
     setError(null);
   }
 
+  // limpar a mensagem de sucesso
   function handleSuccess(){
     setSuccess(null);
   }
