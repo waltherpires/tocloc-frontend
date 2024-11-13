@@ -1,5 +1,6 @@
 export default function Table({ fetching, columns, data, clickEdit, clickDelete, filter = "" }){
 
+  // Filtrando linhas da tabela
   const filteredData = data.filter((element) => {
     if (filter === ""){
       return element;
@@ -8,7 +9,6 @@ export default function Table({ fetching, columns, data, clickEdit, clickDelete,
       return Object.values(element).some((value) =>
         value?.toString().toLowerCase().includes(filter)
       );
-      //return element.text.toLowerCase().includes(filter);
     }
   })
 

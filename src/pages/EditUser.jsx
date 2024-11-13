@@ -26,6 +26,7 @@ export default function EditUser(){
                 originalPassword: editUser.password,
                 originalEmail: editUser.email,
                 originalTypeOfUser: editUser.typeOfUser,
+                originalPhoneNumber: editUser.phoneNumber,
               });
           }catch(error){
               console.log(error.message);
@@ -56,6 +57,7 @@ export default function EditUser(){
       password: user.password === '' ? user.originalPassword : user.password,
       email: user.email === '' ? user.originalEmail : user.email,
       typeOfUser: user.typeOfUser === '' ? user.originalTypeOfUser : user.typeOfUser,
+      phoneNumber: user.phoneNumber === '' ? user.originalPhoneNumber : user.phoneNumber,
     }
 
     // chechando se não houve nenhuma alteração
@@ -63,7 +65,8 @@ export default function EditUser(){
       updatedUser.name === user.originalName &&
       updatedUser.password === user.originalPassword &&
       updatedUser.email === user.originalEmail &&
-      updatedUser.typeOfUser === user.originalTypeOfUser
+      updatedUser.typeOfUser === user.originalTypeOfUser &&
+      updatedUser.phoneNumber === user.originalPhoneNumber
     );
 
     try{
@@ -129,6 +132,17 @@ export default function EditUser(){
             type="email" 
             value={user.email}
             onChange={(event) => handleInputChange('email', event.target.value)}
+          />
+
+          <Input
+            required
+            label="Telefone" 
+            id="telefone" 
+            type="tel"
+            maxlength={11}
+            minlength={9}
+            value={user.phoneNumber}
+            onChange={(event) => handleInputChange('phoneNumber', event.target.value)}
           />
 
           <Input 

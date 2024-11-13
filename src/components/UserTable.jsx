@@ -70,9 +70,10 @@ export default function UserTable(){
             <Modal open={error} onClose={handleError}> 
                 {error && <MessagePage title="Um erro ocorreu!" message={error} onConfirm={handleError} />}
             </Modal>
-            <div className="flex flex-col gap-1 justify-start items-center">
-            <SearchBar filterChange={handleFilter}/>
-            <Table filter={filter} fetching={isFetching} columns={userColumns} data={users} clickDelete={handleRemoveUser} clickEdit={handleEditUser}/>
+            <div className="p-3 sm:px-5 sm:py-8 bg-neutral-900 flex flex-col gap-1 justify-start items-center rounded">
+                <h1 className="md:text-6xl font-logo text-center font-bold text-white shadow-md mb-3 sm:mb-6">Usuários</h1>
+                <SearchBar filterChange={handleFilter}/>
+                <Table filter={filter} fetching={isFetching} columns={userColumns} data={users} clickDelete={handleRemoveUser} clickEdit={handleEditUser}/>
             </div>
         </>
     )
