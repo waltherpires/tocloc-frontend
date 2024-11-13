@@ -54,9 +54,9 @@ export default function UserTable(){
 
     const userColumns = [
         { label: 'Nome', field: 'name' },
-        { label: 'E-mail', field: 'email'},
+        { label: 'E-mail', field: 'email', smallDisplay: false },
         { label: 'Telefone', field: 'phoneNumber' },
-        { label: 'Tipo de Usuário', field: 'typeOfUser' },
+        { label: 'Tipo de Usuário', field: 'typeOfUser', smallDisplay: false },
     ];
 
     return (
@@ -64,7 +64,7 @@ export default function UserTable(){
             <Modal open={error} onClose={handleError}> 
                 {error && <MessagePage title="Um erro ocorreu!" message={error} onConfirm={handleError} />}
             </Modal>
-            <Table columns={userColumns} data={users} clickDelete={handleRemoveUser} clickEdit={handleEditUser}/>
+            <Table fetching={isFetching} columns={userColumns} data={users} clickDelete={handleRemoveUser} clickEdit={handleEditUser}/>
  
             {/* <table className="center text-left table-auto min-w-max rounded min-w-[121px] sm:min-w-[185px] md:min-w-[739px]">
                 <thead>

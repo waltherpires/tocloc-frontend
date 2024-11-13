@@ -5,7 +5,9 @@ import { fetchAllPlaces } from '../../http'
 import Table from './Table';
 
 export default function PlaceTable(){
+  const [isFetching, setIsFetching] = useState(false);
   const [places, setPlaces] = useState([]);
+  const [error, setError] = useState();
 
   useEffect(() => {
     async function getAllPlaces(){
@@ -31,7 +33,7 @@ export default function PlaceTable(){
   const placesColumns = [
     { label: 'Nome' , field: 'nome' },
     { label: 'Endereço', field: 'endereco' },
-    { label: 'Capacidade', field: 'capacidade' },
+    { label: 'Capacidade', field: 'capacidade', smallDisplay: false },
     { label: 'Preço por Hora', field: 'precoPorHora' }
   ];
 

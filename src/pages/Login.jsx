@@ -2,24 +2,24 @@
 export default function Login(){
   return (
     <div className="flex justify-center items-center h-[90vh]"> 
-      <div className="w-1/3 p-6 shadow-lg bg-white rounded-md"> 
-        <h1 className="text-3xl block text-center font-semibold"><i class="fa-solid fa-user mx-2"></i>Login</h1> 
+      <div className="sm:w-1/2 md:w-96 p-6 shadow-lg bg-white rounded-md"> 
+        <h1 className="text-3xl block text-center font-semibold"><i className="fa-solid fa-user mx-2"></i>Login</h1> 
         <hr className="mt-3"/>      
         <div className="mt-3">
-          <label for="username" className="block text-base mb-2">Usuário</label>
+          <label htmlFor="username" className="block text-base mb-2">Usuário</label>
           <input type="text" id="username" className="border w-full text-base px-2 py-1 focus:outline-none focus:ring-0 focus:border-gray-600" placeholder="Digite seu usuário..."/>  
         </div>
         <div className="mt-3">
-          <label for="password" className="block text-base mb-2">Senha</label>
+          <label htmlFor="password" className="block text-base mb-2">Senha</label>
           <input type="password" id="password" className="border w-full text-base px-2 py-1 focus:outline-none focus:ring-0 focus:border-gray-600" placeholder="Digite sua senha..."/>  
         </div>
-        <div className="mt-3 flex justify-between items-center"> 
+        <div className="mt-3 flex justify-between gap-1 md:gap-2 items-center"> 
           <div>
             <input type="checkbox" className="mx-1"/>
-            <label>Lembrar de mim?</label>
+            <label className="text-xs sm:text-s">Lembrar de mim?</label>
           </div>
           <div>
-            <a href="#" className="text-indigo-800 font-semibold">Esqueceu sua senha?</a>
+            <a href="#" className="text-indigo-800 text-xs sm:text-sm">Esqueceu sua senha?</a>
           </div>
         </div>
         <div className="mt-5">

@@ -62,7 +62,7 @@ export default function EditPlace(){
         {error && <MessagePage title="Um erro ocorreu" message={error} onConfirm={handleError} />}
       </Modal>
       <div className="flex justify-center items-center h-[90vh]"> 
-          <form className="w-1/3 p-6 shadow-lg bg-white rounded-md" onSubmit={handleSubmit}> 
+          <form className="sm:w-80 md:w-96 p-6 shadow-lg bg-white rounded-md" onSubmit={handleSubmit}> 
             <h1 className="text-3xl block text-center font-semibold"><i className="fa-solid fa-user mx-2"></i>Editar Local</h1> 
             <hr className="mt-3"/>
 
