@@ -59,7 +59,8 @@ export default function CreateAccount(){
               required 
               label="Nome" 
               id="name" 
-              type="text" 
+              type="text"
+              placeholder="Digite seu nome..."
               value={user.name}
               onChange={(event) => handleInputChange('name', event.target.value)}
             />
@@ -68,7 +69,7 @@ export default function CreateAccount(){
               label="Nova Senha" 
               id="password" 
               type="password"
-              placeholder="Digite sua nova senha" 
+              placeholder="Digite sua senha..." 
               onChange={(event) => handleInputChange('password', event.target.value)}
             />
 
@@ -76,6 +77,7 @@ export default function CreateAccount(){
               required
               label="E-mail" 
               id="email" 
+              placeholder="Digite seu e-mail..."
               type="email" 
               value={user.email}
               onChange={(event) => handleInputChange('email', event.target.value)}
@@ -85,6 +87,7 @@ export default function CreateAccount(){
               required
               label="Telefone" 
               id="telefone" 
+              placeholder="Digite seu telefone..."
               type="tel"
               maxlength={11}
               minlength={9}

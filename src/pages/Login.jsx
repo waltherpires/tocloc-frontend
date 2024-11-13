@@ -14,8 +14,8 @@ export default function Login(){
         <h1 className="text-3xl block text-center font-semibold"><i className="fa-solid fa-user mx-2"></i>Login</h1> 
         <hr className="mt-3"/>      
         <div className="mt-3">
-          <label htmlFor="username" className="block text-base mb-2">Usuário</label>
-          <input type="text" id="username" className="border w-full text-base px-2 py-1 focus:outline-none focus:ring-0 focus:border-gray-600" placeholder="Digite seu usuário..."/>  
+          <label htmlFor="username" className="block text-base mb-2">E-mail</label>
+          <input type="text" id="username" className="border w-full text-base px-2 py-1 focus:outline-none focus:ring-0 focus:border-gray-600" placeholder="Digite seu e-mail..."/>  
         </div>
         <div className="mt-3">
           <label htmlFor="password" className="block text-base mb-2">Senha</label>
@@ -27,7 +27,7 @@ export default function Login(){
             <label className="text-xs sm:text-s">Lembrar de mim?</label>
           </div>
           <div>
-            <p className="text-indigo-800 text-xs sm:text-sm" onClick={handleCreateAccount}><>Ainda não é cadastrado? <br /> Crie sua conta!</></p>
+            <p className="text-indigo-800 text-xs sm:text-sm cursor-pointer" onClick={handleCreateAccount}><>Ainda não é cadastrado? <br /> Crie sua conta!</></p>
           </div>
         </div>
         <div className="mt-5">
