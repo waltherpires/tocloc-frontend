@@ -29,10 +29,10 @@ export default function Header(){
                 </div>
                 <div className={listClass}>
                     <ul className="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
-                        <li className="hover:text-gray-500" onClick={() => onToggleMenu('/')} >Home</li>
-                        <li className="hover:text-gray-500" onClick={() => onToggleMenu()} >Reservas</li>
-                        <li className="hover:text-gray-500" onClick={() => onToggleMenu('/locais')} >Locais</li>
-                        <li className="hover:text-gray-500" onClick={() => onToggleMenu('/users')} >Usuários</li>
+                        <li className="hover:text-gray-500 cursor-pointer" onClick={() => onToggleMenu('/')} >Home</li>
+                        <li className="hover:text-gray-500 cursor-pointer" onClick={() => onToggleMenu()} >Reservas</li>
+                        <li className="hover:text-gray-500 cursor-pointer" onClick={() => onToggleMenu('/locais')} >Locais</li>
+                        <li className="hover:text-gray-500 cursor-pointer" onClick={() => onToggleMenu('/users')} >Usuários</li>
                     </ul>
                 </div>
                 <div className="flex items-center gap-4">

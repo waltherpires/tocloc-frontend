@@ -1,5 +1,13 @@
+import { useNavigate } from "react-router-dom"
+
 
 export default function Login(){
+  const navigate = useNavigate();
+
+  function handleCreateAccount(){
+    navigate('/createaccount');
+  }
+
   return (
     <div className="flex justify-center items-center h-[100vh]"> 
       <div className="sm:w-1/2 md:w-96 p-6 shadow-lg bg-white rounded-md"> 
@@ -19,7 +27,7 @@ export default function Login(){
             <label className="text-xs sm:text-s">Lembrar de mim?</label>
           </div>
           <div>
-            <a href="#" className="text-indigo-800 text-xs sm:text-sm">Esqueceu sua senha?</a>
+            <p className="text-indigo-800 text-xs sm:text-sm" onClick={handleCreateAccount}><>Ainda não é cadastrado? <br /> Crie sua conta!</></p>
           </div>
         </div>
         <div className="mt-5">

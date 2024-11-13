@@ -26,7 +26,7 @@ export default function Table({ fetching, columns, data, clickEdit, clickDelete,
               <th className="px-1 sm:px-2 md:px-4 py-4 text-xs sm:text-sm md:text-base border-b border-r border-slate-300 bg-[#F0F0F0]">Ações</th>
             </tr>
         </thead>
-        <tbody className="bg-gray-100">
+        <tbody className="bg-[#F0F0F0]">
           {!fetching && filteredData.length === 0 &&
             <tr className="hover:bg-gray-300">
               <td className="px-1 sm:px-2 md:px-4 py-2 text-xs sm:text-sm md:text-base  border-b border-r border-slate-300" colSpan={columns.length + 1}><p className="text-center">Nenhuma informação foi encontrada!</p></td>
@@ -40,7 +40,7 @@ export default function Table({ fetching, columns, data, clickEdit, clickDelete,
           {!fetching && filteredData.map((item, id) => 
           {
             return (
-              <tr key={id} className="hover:bg-gray-300">
+              <tr key={id} className="hover:bg-[#d8d8d8]">
                 {columns.map((column, index) => 
                   (
                     <td key={index} className={`px-1 sm:px-2 md:px-4 py-1 text-xs sm:text-sm md:text-base max-w-48 border-b border-r border-slate-300 ${column.smallDisplay === false ? 'hidden sm:table-cell' : ''}`}>
