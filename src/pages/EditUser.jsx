@@ -51,10 +51,10 @@ export default function EditUser(){
     // checando se existem campos vazios
     const updatedUser = {
       ...user,
-      name: (user.name === '' || user.name === null) ? user.originalName : user.name,
-      password: (user.password === '' || user.password === null) ? user.originalPassword : user.password,
-      email: (user.email === '' || user.email === null) ? user.originalEmail : user.email,
-      typeOfUser: (user.typeOfUser === '' || user.typeOfUser === null) ? user.originalTypeOfUser : user.typeOfUser,
+      name: user.name === ''  ? user.originalName : user.name,
+      password: user.password === '' ? user.originalPassword : user.password,
+      email: user.email === '' ? user.originalEmail : user.email,
+      typeOfUser: user.typeOfUser === '' ? user.originalTypeOfUser : user.typeOfUser,
     }
 
     // chechando se não houve nenhuma alteração
@@ -101,7 +101,8 @@ export default function EditUser(){
           }           
           <hr className="mt-3"/>
 
-          <Input 
+          <Input
+            required 
             label="Nome" 
             id="name" 
             type="text" 
@@ -109,7 +110,8 @@ export default function EditUser(){
             onChange={(event) => handleInputChange('name', event.target.value)}
           />
 
-          <Input 
+          <Input
+            required 
             label="Nova Senha" 
             id="password" 
             type="password"
@@ -117,7 +119,8 @@ export default function EditUser(){
             onChange={(event) => handleInputChange('password', event.target.value)}
           />
 
-          <Input 
+          <Input
+            required
             label="E-mail" 
             id="email" 
             type="email" 
@@ -126,6 +129,7 @@ export default function EditUser(){
           />
 
           <Input 
+            required
             label="Tipo de Usuário" 
             id="tipo" 
             type="text" 
