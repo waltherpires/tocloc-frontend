@@ -1,7 +1,7 @@
 
 export default function Login(){
   return (
-    <div className="flex justify-center items-center h-[90vh]"> 
+    <div className="flex justify-center items-center h-[100vh]"> 
       <div className="sm:w-1/2 md:w-96 p-6 shadow-lg bg-white rounded-md"> 
         <h1 className="text-3xl block text-center font-semibold"><i className="fa-solid fa-user mx-2"></i>Login</h1> 
         <hr className="mt-3"/>      
