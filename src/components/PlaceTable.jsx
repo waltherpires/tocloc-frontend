@@ -5,13 +5,21 @@ import { deletePlaceById, fetchAllPlaces } from '../../http';
 import MessagePage from './MessagePage';
 import Modal from './Modal';
 import Table from './Table';
+import SearchBar from './SearchBar';
 
 export default function PlaceTable(){
   const navigate = useNavigate();
   const [isFetching, setIsFetching] = useState(false);
   const [places, setPlaces] = useState([]);
   const [error, setError] = useState();
+  const [filter, setFilter] = useState("");
 
+  const placesColumns = [
+    { label: 'Nome' , field: 'nome' },
+    { label: 'Endereço', field: 'endereco' },
+    { label: 'Capacidade', field: 'capacidade', smallDisplay: false },
+    { label: 'Preço Hora (R$)', field: 'precoPorHora' }
+  ];
 
   useEffect(() => {
     async function getAllPlaces(){
@@ -51,20 +59,20 @@ export default function PlaceTable(){
     setError(null);
   }
 
-  const placesColumns = [
-    { label: 'Nome' , field: 'nome' },
-    { label: 'Endereço', field: 'endereco' },
-    { label: 'Capacidade', field: 'capacidade', smallDisplay: false },
-    { label: 'Preço Hora (R$)', field: 'precoPorHora' }
-  ];
+  function handleFilter(value) {
+    let valueToLower = value.toLowerCase();
+    setFilter(valueToLower);
+}
 
   return (
     <>
       <Modal open={error} onClose={handleError}> 
         {error && <MessagePage title="Um erro ocorreu!" message={error} onConfirm={handleError} />}
       </Modal>
-
-      <Table fetching={isFetching} columns={placesColumns} data={places} clickDelete={handleRemovePlace} clickEdit={handleEditPlace}/>
+      <div className="flex flex-col gap-1 justify-start items-center">
+        <SearchBar filterChange={handleFilter}/>
+        <Table filter={filter} fetching={isFetching} columns={placesColumns} data={places} clickDelete={handleRemovePlace} clickEdit={handleEditPlace}/>
+      </div>
     </>
 
   )

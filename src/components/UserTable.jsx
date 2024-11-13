@@ -5,12 +5,14 @@ import { deleteUserById, fetchAllUsers } from "../../http";
 import Modal from "./Modal";
 import MessagePage from "./MessagePage";
 import Table from "./Table";
+import SearchBar from "./SearchBar";
 
 export default function UserTable(){
     const navigate = useNavigate();
     const [isFetching, setIsFetching] = useState(false);
     const [users, setUsers] = useState([]);
     const [error, setError] = useState();
+    const [filter, setFilter] = useState("");
 
     useEffect(() =>{
         async function fetchUsers(){
@@ -51,8 +53,10 @@ export default function UserTable(){
         setError(null);
     }
 
-    // let whiteRow = 'p-2 md:p-4 border-b border-slate-300 bg-slate-50';
-    // let grayRow = 'p-2 md:p-4 border-b border-slate-300 bg-gray-200';
+    function handleFilter(value) {
+        let valueToLower = value.toLowerCase();
+        setFilter(valueToLower);
+    }
 
     const userColumns = [
         { label: 'Nome', field: 'name' },
@@ -66,7 +70,10 @@ export default function UserTable(){
             <Modal open={error} onClose={handleError}> 
                 {error && <MessagePage title="Um erro ocorreu!" message={error} onConfirm={handleError} />}
             </Modal>
-            <Table fetching={isFetching} columns={userColumns} data={users} clickDelete={handleRemoveUser} clickEdit={handleEditUser}/>
+            <div className="flex flex-col gap-1 justify-start items-center">
+            <SearchBar filterChange={handleFilter}/>
+            <Table filter={filter} fetching={isFetching} columns={userColumns} data={users} clickDelete={handleRemoveUser} clickEdit={handleEditUser}/>
+            </div>
         </>
     )
 }
