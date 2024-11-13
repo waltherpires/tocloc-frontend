@@ -6,6 +6,7 @@ import MessagePage from './MessagePage';
 import Modal from './Modal';
 import Table from './Table';
 import SearchBar from './SearchBar';
+import Container from './Container';
 
 export default function PlaceTable(){
   const navigate = useNavigate();
@@ -70,11 +71,10 @@ export default function PlaceTable(){
         {error && <MessagePage title="Um erro ocorreu!" message={error} onConfirm={handleError} />}
       </Modal>
       
-      <div className="p-3 sm:px-5 sm:py-8 bg-neutral-900 flex flex-col gap-1 justify-start items-center rounded">
-        <h1 className="md:text-6xl font-logo text-center font-bold text-white shadow-md mb-3 sm:mb-6">Locais</h1>
+      <Container title="Locais"> 
         <SearchBar filterChange={handleFilter}/>
         <Table filter={filter} fetching={isFetching} columns={placesColumns} data={places} clickDelete={handleRemovePlace} clickEdit={handleEditPlace}/>
-      </div>
+      </Container>
     </>
 
   )

@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Input from '../components/Input';
 import Modal from '../components/Modal';
 import MessagePage from '../components/MessagePage';
+import Container from '../components/Container'
 
 export default function EditUser(){
   const navigate = useNavigate();
@@ -100,64 +101,71 @@ export default function EditUser(){
         {success && <MessagePage title="Sucesso!" message={success} onConfirm={handleSuccess}/> }
         {error && <MessagePage title="Um erro ocorreu" message={error} onConfirm={handleError} />}
       </Modal>
-      <div className="overflow-auto flex justify-center items-center h-[100vh]"> 
-        <form className="w-1/3 min-w-60 p-2 shadow-lg bg-white rounded-md" onSubmit={handleSubmit}> 
-          <h1 className="text-sm sm:text-base md:text-xl block text-center font-semibold"><i className="fa-solid fa-user mx-2"></i>Editar Usuário</h1> 
-          {isFetching && 
-            <h3 className="mt-2 block text-center">Carregando dados do usuário...</h3>
-          }           
-          <hr className="mt-2 "/>
+      <div className="overflow-auto flex justify-center items-center h-[100vh]">
+        <Container>
+          <form className="min-w-60 w-96 p-2 shadow-lg bg-[#F0F0F0] rounded-md shadow-md" onSubmit={handleSubmit}> 
+            <h1 className="text-sm sm:text-base md:text-xl block text-center font-semibold"><i className="fa-solid fa-user mx-2"></i>Editar Usuário</h1> 
+            {isFetching && 
+              <h3 className="mt-2 block text-center">Carregando dados do usuário...</h3>
+            }           
+            <hr className="mt-2 "/>
 
-          <Input
-            required 
-            label="Nome" 
-            id="name" 
-            type="text" 
-            value={user.name}
-            onChange={(event) => handleInputChange('name', event.target.value)}
-          />
+            <Input
+              required 
+              label="Nome" 
+              id="name" 
+              type="text" 
+              value={user.name}
+              onChange={(event) => handleInputChange('name', event.target.value)}
+            />
 
-          <Input
-            label="Nova Senha" 
-            id="password" 
-            type="password"
-            placeholder="Digite sua nova senha" 
-            onChange={(event) => handleInputChange('password', event.target.value)}
-          />
+            <Input
+              label="Nova Senha" 
+              id="password" 
+              type="password"
+              placeholder="Digite sua nova senha" 
+              onChange={(event) => handleInputChange('password', event.target.value)}
+            />
 
-          <Input
-            required
-            label="E-mail" 
-            id="email" 
-            type="email" 
-            value={user.email}
-            onChange={(event) => handleInputChange('email', event.target.value)}
-          />
+            <Input
+              required
+              label="E-mail" 
+              id="email" 
+              type="email" 
+              value={user.email}
+              onChange={(event) => handleInputChange('email', event.target.value)}
+            />
 
-          <Input
-            required
-            label="Telefone" 
-            id="telefone" 
-            type="tel"
-            maxlength={11}
-            minlength={9}
-            value={user.phoneNumber}
-            onChange={(event) => handleInputChange('phoneNumber', event.target.value)}
-          />
+            <Input
+              required
+              label="Telefone" 
+              id="telefone" 
+              type="tel"
+              maxlength={11}
+              minlength={9}
+              value={user.phoneNumber}
+              onChange={(event) => handleInputChange('phoneNumber', event.target.value)}
+            />
 
-          <Input 
-            required
-            label="Tipo de Usuário" 
-            id="tipo" 
-            type="text" 
-            value={user.typeOfUser}
-            onChange={(event) => handleInputChange('typeOfUser', event.target.value)}
-          />
+            <div className="mt-2">
+              <label className="block text-xs sm:text-sm md:text-base mb-1 md:mb-2">Tipo de Usuário</label>
+              <select 
+                name="typeOfUser" 
+                className="border w-full text-xs sm:text-sm px-2 py-1 focus:outline-none focus:ring-0 focus:border-gray-600"
+                onChange={(event) => handleInputChange('typeOfUser', event.target.value)}
+                value={user.typeOfUser}
+              > 
+                <option value="locador">Locador</option>
+                <option value="locatario">Locatário</option>
+                <option value="visitante">Visitante</option>
+              </select>
+            </div>
 
-          <div className="mt-2">
-            <button type="submit" className="border-2 py-1 rounded-md w-full font-semibold bg-neutral-500 text-white hover:bg-neutral-900">Salvar</button>
-          </div>
-        </form>
+            <div className="mt-2">
+              <button type="submit" className="border-2 py-1 rounded-md w-full font-semibold bg-neutral-500 text-white hover:bg-neutral-900">Salvar</button>
+            </div>
+          </form>
+        </Container> 
       </div>
     </>
 

@@ -6,7 +6,7 @@ export default function Header(){
     const navigate = useNavigate();
     const [iconMenu, setIconMenu] = useState(true);
 
-    let listClass = "md:static duration-500 md:top-[100%] absolute bg-white md:min-h-fit min-h-[60vh] left-0  md:w-auto w-full flex items-center px-5"
+    let listClass = "md:static duration-500 md:top-[100%] absolute bg-[#F0F0F0] md:min-h-fit min-h-[60vh] left-0  md:w-auto w-full flex items-center px-5"
 
     function onToggleMenu(url){
         setIconMenu(prevIcon => !prevIcon);
@@ -22,7 +22,7 @@ export default function Header(){
     }
 
     return (
-        <header className="bg-white font-primary min-h-[40px]">
+        <header className="bg-[#F0F0F0] font-primary min-h-[40px]">
             <nav className="mx-auto py-1 min-h-[10vh] flex justify-between items-center w-[92%] gap-4">
                 <div className="">
                     <p className=" bg-neutral-800 px-2 rounded text-4xl text-center font-logo"><a className="text-white">TocLoc</a></p>

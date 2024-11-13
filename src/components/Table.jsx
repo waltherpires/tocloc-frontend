@@ -13,17 +13,17 @@ export default function Table({ fetching, columns, data, clickEdit, clickDelete,
   })
 
   return (
-      <table className="center text-left table-auto rounded min-w-[121px] sm:min-w-[185px] md:min-w-[739px] rounded">
+      <table className="center text-left table-auto min-w-[121px] sm:min-w-[185px] md:min-w-[739px] rounded">
         <thead>
             <tr>
               {columns.map(
                 (column, index) => (
-                  <th key={index} className={`px-1 sm:px-2 md:px-4 py-4 text-xs sm:text-sm md:text-base border-b border-r border-slate-300 bg-slate-50 rounded-t-sm ${column.smallDisplay === false ? 'hidden sm:table-cell' : ''}`}>
+                  <th key={index} className={`px-1 sm:px-2 md:px-4 py-4 text-xs sm:text-sm md:text-base border-b border-r border-slate-300 bg-[#F0F0F0] rounded-t-sm ${column.smallDisplay === false ? 'hidden sm:table-cell' : ''}`}>
                     {column.label}
                   </th>
                 )  
               )}
-              <th className="px-1 sm:px-2 md:px-4 py-4 text-xs sm:text-sm md:text-base border-b border-r border-slate-300 bg-slate-50">Ações</th>
+              <th className="px-1 sm:px-2 md:px-4 py-4 text-xs sm:text-sm md:text-base border-b border-r border-slate-300 bg-[#F0F0F0]">Ações</th>
             </tr>
         </thead>
         <tbody className="bg-gray-100">
@@ -33,7 +33,7 @@ export default function Table({ fetching, columns, data, clickEdit, clickDelete,
             </tr>
           }
           {fetching &&
-            <tr className="hover:bg-gray-300">
+            <tr className="hover:bg-[#F0F0F0]">
               <td className="px-1 sm:px-2 md:px-2 py-2 text-xs sm:text-sm md:text-base  border-b border-r border-slate-300" colSpan={columns.length + 1}><p className="text-center">Carregando dados...</p></td>
             </tr>
           } 
