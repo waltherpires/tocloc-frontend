@@ -17,11 +17,10 @@ export default function MyRoutes() {
             <Header/>
             <Routes>
                 <Route path="users" element={<Users />} />
-                <Route path="/" element={<Login />} />
+                <Route path="login" element={<Login />} />
                 <Route path="locais" element={<Places />} /> 
                 <Route path="edituser/:userId" element={<EditUser />} />
                 <Route path="editplace/:placeId" element={<EditPlace />} />
-                
             </Routes>
         </Router>
     )

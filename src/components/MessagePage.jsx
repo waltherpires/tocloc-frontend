@@ -1,6 +1,6 @@
 export default function MessagePage({ title, message, onConfirm }) {
     return (
-      <div className="mx-auto p-4 bg-slate-50 rounded">
+      <div className="mx-auto p-4 bg-black-50  rounded">
         <h2 className="mb-5 text-lg font-lg text-gray-900 dark:text-gray-400">{title}</h2>
         <p className="mb-5 text-base font-normal text-gray-500 dark:text-gray-400">{message}</p>
         {onConfirm && (

@@ -53,3 +53,23 @@ export async function fetchPlaceById(id){
 
     return response.data;
 }
+
+export async function updatePlace(id, body){
+    const response = await axios.put(`http://localhost:8080/locais/${id}`, body);
+
+    if (response.status > 400) {
+        throw new Error("Erro ao editar usuário");
+    }
+
+    return response.data;
+} 
+
+export async function deletePlaceById(id){
+    const response = await axios.delete(`http://localhost:8080/locais/${id}`);
+    
+    if(response.status > 400){
+        throw new Error("Erro ao excluir usuário")
+    }
+
+    return response.data;
+}

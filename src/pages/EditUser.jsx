@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { fetchUserById, updateUser } from "../../http";
 import { useEffect, useState } from "react";
 
@@ -7,6 +7,7 @@ import Modal from '../components/Modal';
 import MessagePage from '../components/MessagePage';
 
 export default function EditUser(){
+  const navigate = useNavigate();
   const { userId } = useParams();
   const [isFetching, setIsFetching] = useState(false);
   const [user, setUser] = useState({});
@@ -34,7 +35,7 @@ export default function EditUser(){
       }
       
       fetchUser();
-  }, []);
+  }, [userId]);
 
   //lidando com mudanças nos campos
   function handleInputChange(identifier, value){
@@ -66,9 +67,11 @@ export default function EditUser(){
     );
 
     try{
+
       if(noChange){
         throw new Error("Nenhum dado foi alterado!");
       }
+
       await updateUser(userId, updatedUser);
       setSuccess("Usuário atualizado com sucesso");
     }catch(error){
@@ -85,6 +88,7 @@ export default function EditUser(){
   // limpar a mensagem de sucesso
   function handleSuccess(){
     setSuccess(null);
+    navigate('/users')
   }
 
   return (
@@ -93,13 +97,13 @@ export default function EditUser(){
         {success && <MessagePage title="Sucesso!" message={success} onConfirm={handleSuccess}/> }
         {error && <MessagePage title="Um erro ocorreu" message={error} onConfirm={handleError} />}
       </Modal>
-      <div className="flex justify-center items-center h-[90vh]"> 
-        <form className="w-1/3 p-6 shadow-lg bg-white rounded-md" onSubmit={handleSubmit}> 
-          <h1 className="text-3xl block text-center font-semibold"><i className="fa-solid fa-user mx-2"></i>Editar Usuário</h1> 
+      <div className="overflow-auto flex justify-center items-center h-[100vh]"> 
+        <form className="w-1/3 min-w-60 p-2 shadow-lg bg-white rounded-md" onSubmit={handleSubmit}> 
+          <h1 className="text-sm sm:text-base md:text-xl block text-center font-semibold"><i className="fa-solid fa-user mx-2"></i>Editar Usuário</h1> 
           {isFetching && 
             <h3 className="mt-2 block text-center">Carregando dados do usuário...</h3>
           }           
-          <hr className="mt-3"/>
+          <hr className="mt-2 "/>
 
           <Input
             required 
@@ -111,7 +115,6 @@ export default function EditUser(){
           />
 
           <Input
-            required 
             label="Nova Senha" 
             id="password" 
             type="password"
@@ -137,7 +140,7 @@ export default function EditUser(){
             onChange={(event) => handleInputChange('typeOfUser', event.target.value)}
           />
 
-          <div className="mt-5">
+          <div className="mt-2">
             <button type="submit" className="border-2 py-1 rounded-md w-full font-semibold bg-neutral-500 text-white hover:bg-neutral-900">Salvar</button>
           </div>
         </form>
