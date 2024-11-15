@@ -1,4 +1,4 @@
-export default function Table({ fetching, columns, data, clickEdit, clickDelete, filter = "" }){
+export default function Table({ columns, data = [], clickEdit, clickDelete, filter = ""}){
 
   // Filtrando linhas da tabela
   const filteredData = data.filter((element) => {
@@ -27,17 +27,12 @@ export default function Table({ fetching, columns, data, clickEdit, clickDelete,
             </tr>
         </thead>
         <tbody className="bg-[#F0F0F0]">
-          {!fetching && filteredData.length === 0 &&
+          {filteredData.length === 0 &&
             <tr className="hover:bg-gray-300">
               <td className="px-1 sm:px-2 md:px-4 py-2 text-xs sm:text-sm md:text-base  border-b border-r border-slate-300" colSpan={columns.length + 1}><p className="text-center">Nenhuma informação foi encontrada!</p></td>
             </tr>
           }
-          {fetching &&
-            <tr className="hover:bg-[#F0F0F0]">
-              <td className="px-1 sm:px-2 md:px-2 py-2 text-xs sm:text-sm md:text-base  border-b border-r border-slate-300" colSpan={columns.length + 1}><p className="text-center">Carregando dados...</p></td>
-            </tr>
-          } 
-          {!fetching && filteredData.map((item, id) => 
+          {filteredData.map((item, id) => 
           {
             return (
               <tr key={id} className="hover:bg-[#d8d8d8]">
@@ -47,10 +42,10 @@ export default function Table({ fetching, columns, data, clickEdit, clickDelete,
                       {column.specialStyle && (
                         <div
                           className={`rounded text-center ${
-                            item[column.field] === 'admin'
+                            item[column.field] === 'administrador'
                             ? 'bg-yellow-400'
                             : item[column.field] === 'locatario'
-                            ? 'bg-gray-500'
+                            ? 'bg-green-300'
                             : 'bg-blue-300'
                             }
                           `}>{item[column.field]}</div>

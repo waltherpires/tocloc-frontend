@@ -101,11 +101,10 @@ export default function CreateAccount(){
                 name="typeOfUser" 
                 className="border w-full text-xs sm:text-sm px-2 py-1 focus:outline-none focus:ring-0 focus:border-gray-600"
                 onChange={(event) => handleInputChange('typeOfUser', event.target.value)}
-                value={user.typeOfUser}
               > 
                 <option value="locador">Locador</option>
                 <option value="locatario">Locatário</option>
-                <option value="visitante">Visitante</option>
+                <option value="administrador">Administrador</option>
               </select>
             </div>
 

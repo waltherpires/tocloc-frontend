@@ -11,7 +11,6 @@ import MessagePage from "../components/MessagePage";
 export default function EditPlace(){
   const navigate = useNavigate();
   const { placeId } = useParams();
-  const [isFetching, setIsFetching] = useState(false);
   const [place, setPlace] = useState({});
   const [error, setError] = useState();
   const [success, setSuccess] = useState();
@@ -19,7 +18,6 @@ export default function EditPlace(){
 
   useEffect(() => {
     async function getPlace(){
-      setIsFetching(true);
       try{
         const editPlace = await fetchPlaceById(placeId);
         setPlace({
@@ -28,9 +26,7 @@ export default function EditPlace(){
       }catch(error){
         console.error(error.message);
         setError(error.message);
-      }finally{
-        setIsFetching(false);
-      } 
+      }
     }
 
     getPlace();

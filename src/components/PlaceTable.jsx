@@ -76,6 +76,5 @@ export default function PlaceTable(){
         <Table filter={filter} fetching={isFetching} columns={placesColumns} data={places} clickDelete={handleRemovePlace} clickEdit={handleEditPlace}/>
       </Container>
     </>
-
   )
 }
