@@ -1,9 +1,18 @@
-import { useRouteLoaderData, json, Link } from "react-router-dom"
+import { useRouteLoaderData, json, Link, redirect, useSubmit } from "react-router-dom"
 
 import Container from "../components/Container"
 
 export default function UserDetail(){
+    const submit = useSubmit();
     const data = useRouteLoaderData('user-detail');
+
+    function startDeleteHandler(){
+        const proceed = window.confirm("Tem certeza de que deseja deletar este usuário?");
+
+        if(proceed){
+            submit(null, {method: 'delete'});
+        }
+    }
 
     return (
         <div className="flex justify-center items-center h-[100vh]">
@@ -34,12 +43,9 @@ export default function UserDetail(){
                     <div className="flex flex-col md:flex-row gap-2 items-center">
                         <Link className="bg-yellow-500 hover:bg-yellow-700 text-white w-16 p-2 text-center text-xs sm:text-sm md:text-base font-bold  rounded" to="edit" relative="path">Editar</Link>
                         {/* Fazer */}
-                        <Link className="bg-red-500 hover:bg-red-700 text-white w-16 p-2 text-center text-xs sm:text-sm md:text-base font-bold  rounded" to="edit" relative="path">Excluir</Link>
+                        <button className="bg-red-500 hover:bg-red-700 text-white w-16 p-2 text-center text-xs sm:text-sm md:text-base font-bold  rounded" onClick={startDeleteHandler}>Excluir</button>
                     </div>
                 </div>
-
-
-
             </Container>
         </div>
     )
@@ -61,6 +67,23 @@ export async function loader({params}){
     console.log("Dados carregados: ", data);
     
     return data;
+}
+
+export async function action({params, request}){
+    const userId = params.userId;
+
+    const response = await fetch('http://localhost:8080/users/' + userId, {
+        method: request.method,
+    })
+
+    if(!response.ok){
+        throw json(
+            {message: "Erro ao deletar usuário!"},
+            {status: 500}
+        )
+    }
+
+    return redirect('/users');
 }
 
 

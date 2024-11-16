@@ -9,8 +9,14 @@ import Places, {loader as placesLoader} from './pages/Places';
 import CreateAccount from './pages/CreateAccount'
 import RootLayout from './pages/Root';
 import ErrorPage from './pages/Error';
-import UserDetail, {loader as userDetailLoader} from './pages/UserDetail';
-import PlaceDetail, {loader as placeDetailLoader} from './pages/PlaceDetail';
+import UserDetail, {
+  loader as userDetailLoader,
+  action as deleteUserAction
+} from './pages/UserDetail';
+import PlaceDetail, {
+  loader as placeDetailLoader,
+  action as deletePlaceAction
+} from './pages/PlaceDetail';
 
 import './App.css'
 
@@ -27,10 +33,10 @@ const router = createBrowserRouter([
           {index: true, element: <Users />, loader: usersLoader},
           {
             path: ':userId',
-            loader: userDetailLoader,
             id: "user-detail",
+            loader: userDetailLoader,
             children: [
-              {index: true, element: <UserDetail />},
+              {index: true, element: <UserDetail />, action: deleteUserAction},
               {path: 'edit', element: <EditUser />},
             ]
           },
@@ -46,7 +52,7 @@ const router = createBrowserRouter([
             id: "place-detail",
             loader: placeDetailLoader,
             children: [
-              {index: true, element: <PlaceDetail />},
+              {index: true, element: <PlaceDetail />, action: deletePlaceAction},
               {path: 'edit', element: <EditPlace />}
             ]
           }

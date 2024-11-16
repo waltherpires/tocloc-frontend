@@ -1,21 +1,32 @@
-import { useRouteLoaderData, json, Link } from "react-router-dom"
+import { 
+    useRouteLoaderData, 
+    json, 
+    Link, 
+    redirect, 
+    useSubmit 
+} from "react-router-dom"
 
 import Container from "../components/Container"
 
 export default function PlaceDetail(){
+    const submit = useSubmit();
     const data = useRouteLoaderData('place-detail');
+
+    function startDeleteHandler(){
+        const proceed = window.confirm("Tem certeza de que deseja deletar este local?");
+
+        if(proceed){
+            submit(null, { method: 'delete'});
+        }
+    }
 
     return (
         <div className="flex justify-center mt-2 items-center min-h-screen">
-            <Container title="Dados do Local">
+            <Container title={data.nome}>
                 {/* Botoes e campos */}
                 <div className="flex flex-col gap-2 items-center md:justify-start">
                     {/* Campos */}
-                    <div className="flex flex-col gap-2 md:flex-row ">
-                        <div className="bg-[#F0F0F0] px-2 rounded">
-                            <h1 className="font-logo bg-[#262626] px-2 my-1 rounded text-white text-center">Nome</h1>
-                            <p className="text-center">{data.nome}</p>
-                        </div>
+                    <div className="flex flex-col gap-2 md:flex-row">
                         <div className="bg-[#F0F0F0] px-2 rounded">
                             <h1 className="font-logo bg-[#262626] px-2 my-1 rounded text-white text-center">Endereço</h1>
                             <p className="text-center">{data.endereco}</p>
@@ -30,7 +41,7 @@ export default function PlaceDetail(){
                         </div>
                         <div className="bg-[#F0F0F0] px-2 rounded">
                             <h1 className="font-logo bg-[#262626] px-2 my-1 rounded text-white text-center">Preço por Hora (R$)</h1>
-                            <p className="text-center">{data.precoPorHora}</p>
+                            <p className="text-center ">{data.precoPorHora}</p>
                         </div>
                         <div className="bg-[#F0F0F0] px-2 rounded">
                             <h1 className="font-logo bg-[#262626] px-2 my-1 rounded text-white text-center">Proprietário</h1>
@@ -42,7 +53,7 @@ export default function PlaceDetail(){
                     <div className="flex flex-col md:flex-row gap-2 items-center">
                         <Link className="bg-yellow-500 hover:bg-yellow-700 text-white w-16 p-2 text-center text-xs sm:text-sm md:text-base font-bold  rounded" to="edit" relative="path">Editar</Link>
                         {/* Fazer */}
-                        <Link className="bg-red-500 hover:bg-red-700 text-white w-16 p-2 text-center text-xs sm:text-sm md:text-base font-bold  rounded" to="edit" relative="path">Excluir</Link>
+                        <button className="bg-red-500 hover:bg-red-700 text-white w-16 p-2 text-center text-xs sm:text-sm md:text-base font-bold  rounded" onClick={startDeleteHandler}>Excluir</button>
                     </div>
                 </div>
 
@@ -67,6 +78,23 @@ export async function loader({params}){
     console.log("Dados carregados: ", data);
     
     return data;
+}
+
+export async function action({params, request}) {
+    const placeId = params.placeId;
+    const response = await fetch('http://localhost:8080/locais/' + placeId, {
+        method: request.method,
+    });
+
+    if(!response.ok){
+        throw json(
+          { message: 'Erro ao tentar deletar local!'}, 
+          {
+            status: 500
+          }
+        );
+    }
+    return redirect('/locais');
 }
 
 
