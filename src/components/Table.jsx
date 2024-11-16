@@ -1,5 +1,6 @@
-export default function Table({ columns, data = [], clickEdit, clickDelete, filter = ""}){
+import { Link } from "react-router-dom";
 
+export default function Table({ columns, data = [], clickDelete, filter = ""}){
   // Filtrando linhas da tabela
   const filteredData = data.filter((element) => {
     if (filter === ""){
@@ -34,6 +35,7 @@ export default function Table({ columns, data = [], clickEdit, clickDelete, filt
           }
           {filteredData.map((item, id) => 
           {
+            console.log(item)
             return (
               <tr key={id} className="hover:bg-[#d8d8d8]">
                 {columns.map((column, index) => 
@@ -55,8 +57,7 @@ export default function Table({ columns, data = [], clickEdit, clickDelete, filt
                   )
                 )}
                   <td className="flex flex-col md:flex-row gap-1 px-1 sm:px-2 md:px-4 py-1 text-xs sm:text-sm md:text-base">
-                    <button className="bg-yellow-500 hover:bg-yellow-700 text-white text-xs sm:text-sm md:text-base font-bold py-2 px-3 rounded" onClick={() => clickEdit(item.id)}>Editar</button>
-                    <button className="bg-red-500 hover:bg-red-700 text-white text-xs sm:text-sm md:text-base font-bold py-2 px-3 rounded" onClick={()=> clickDelete(item.id)}>Excluir</button>
+                    <Link className="bg-green-500 hover:bg-green-700  text-white text-center text-xs sm:text-sm md:text-base font-bold py-2 px-3 rounded" to={`${item.id}`} relative="path">Detalhes</Link>
                   </td>
               </tr>
             )

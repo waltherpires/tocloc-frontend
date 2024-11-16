@@ -1,17 +1,15 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { IoMdMenu, IoMdClose } from "react-icons/io";
 
 export default function Header(){
-    const navigate = useNavigate();
     const [iconMenu, setIconMenu] = useState(true);
 
     let listClass = "md:static duration-500 md:top-[100%] absolute bg-[#F0F0F0] md:min-h-fit min-h-[60vh] left-0  md:w-auto w-full flex items-center px-5"
 
-    function onToggleMenu(url){
+    function onToggleMenu(){
         setIconMenu(prevIcon => !prevIcon);
 
-        navigate(url);
     }
 
     if(iconMenu){
@@ -29,10 +27,10 @@ export default function Header(){
                 </div>
                 <div className={listClass}>
                     <ul className="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
-                        <li className="hover:text-gray-500 cursor-pointer" onClick={() => onToggleMenu('/')} >Home</li>
-                        <li className="hover:text-gray-500 cursor-pointer" onClick={() => onToggleMenu()} >Reservas</li>
-                        <li className="hover:text-gray-500 cursor-pointer" onClick={() => onToggleMenu('/locais')} >Locais</li>
-                        <li className="hover:text-gray-500 cursor-pointer" onClick={() => onToggleMenu('/users')} >Usuários</li>
+                        <li className="hover:text-gray-500 cursor-pointer" onClick={onToggleMenu}><Link to="/">Home</Link></li>
+                        <li className="hover:text-gray-500 cursor-pointer" onClick={onToggleMenu} ><Link to="/">Reservas</Link></li>
+                        <li className="hover:text-gray-500 cursor-pointer" onClick={onToggleMenu} ><Link to='/locais'>Locais</Link></li>
+                        <li className="hover:text-gray-500 cursor-pointer" onClick={onToggleMenu} ><Link to="/users">Usuários</Link></li>
                     </ul>
                 </div>
                 <div className="flex items-center gap-4">

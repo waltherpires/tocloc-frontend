@@ -15,9 +15,11 @@ export default function Users() {
 export async function loader() {
     const response = await fetch('http://localhost:8080/users');
 
+
     if(!response.ok){
         throw json({ message: "Erro ao tentar obter usuários"}, {status: 500})
-    } else {
-        return response;
-    }
+    } 
+    
+    const data = response.json();
+    return data;
 }
