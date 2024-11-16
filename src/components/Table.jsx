@@ -35,7 +35,6 @@ export default function Table({ columns, data = [], clickDelete, filter = ""}){
           }
           {filteredData.map((item, id) => 
           {
-            console.log(item)
             return (
               <tr key={id} className="hover:bg-[#d8d8d8]">
                 {columns.map((column, index) => 
@@ -56,7 +55,7 @@ export default function Table({ columns, data = [], clickDelete, filter = ""}){
                       </td>
                   )
                 )}
-                  <td className="flex flex-col md:flex-row gap-1 px-1 sm:px-2 md:px-4 py-1 text-xs sm:text-sm md:text-base">
+                  <td className={`px-1 py-3 sm:px-2 md:px-4 text-xs sm:text-sm md:text-base max-w-48 border-b border-r border-slate-300`}>
                     <Link className="bg-green-500 hover:bg-green-700  text-white text-center text-xs sm:text-sm md:text-base font-bold py-2 px-3 rounded" to={`${item.id}`} relative="path">Detalhes</Link>
                   </td>
               </tr>

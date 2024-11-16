@@ -17,6 +17,7 @@ import PlaceDetail, {
   loader as placeDetailLoader,
   action as deletePlaceAction
 } from './pages/PlaceDetail';
+import { action as manipulateUserAction } from './components/UserForm'; 
 
 import './App.css'
 
@@ -37,9 +38,10 @@ const router = createBrowserRouter([
             loader: userDetailLoader,
             children: [
               {index: true, element: <UserDetail />, action: deleteUserAction},
-              {path: 'edit', element: <EditUser />},
+              {path: 'edit', element: <EditUser />, action: manipulateUserAction},
             ]
           },
+          {path: 'new', element: <CreateAccount />, action: manipulateUserAction}
         ]
       },
       {path: 'login', element: <Login /> },
@@ -57,8 +59,7 @@ const router = createBrowserRouter([
             ]
           }
         ] 
-      },
-      {path: 'createaccount', element: <CreateAccount /> }
+      }
     ]
   }
 ]);

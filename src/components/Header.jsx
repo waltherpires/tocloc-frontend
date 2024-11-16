@@ -34,7 +34,7 @@ export default function Header(){
                     </ul>
                 </div>
                 <div className="flex items-center gap-4">
-                    <button className="px-5 py-2 rounded-full bg-neutral-500 text-white hover:bg-neutral-900" onClick={() => onToggleMenu('/login')}>Entrar</button>
+                    <Link className="px-5 py-2 rounded-full bg-neutral-500 text-white hover:bg-neutral-900" to="login">Entrar</Link>
                     
                     {iconMenu && <IoMdMenu onClick={onToggleMenu} className="text-3xl cursor-pointer md:hidden"/>}
                     {!iconMenu && <IoMdClose onClick={onToggleMenu} className="text-3xl cursor-pointer md:hidden"/>}
