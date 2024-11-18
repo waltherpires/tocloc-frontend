@@ -2,14 +2,21 @@ import {
   Form, 
   useNavigation, 
   redirect, 
-  json } from "react-router-dom"
+  json, useSubmit, useRouteLoaderData } from "react-router-dom"
 
 import Input from "./Input"
 import { getAuthToken } from "../util/auth";
 import { action as logoutAction } from '../pages/Logout';
 
 export default function UserForm({title , method, user }){
-    const navigation = useNavigation();
+  const submit = useSubmit();
+  const navigation = useNavigation();
+
+  const { loggedUserId } = useRouteLoaderData('root');
+
+  if(user.id !== loggedUserId){
+      submit(null, {action: '/logout', method: 'post'});
+  }
 
     const isSubmitting = navigation.state === 'submitting';
 

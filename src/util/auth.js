@@ -26,7 +26,7 @@ export function getAuthToken() {
 export function globalLoader(){
     const token = localStorage.getItem('token');
     const loggedUserId = localStorage.getItem('userId');
-    const typeOfUser = localStorage.getItem('typeOfuser');
+    const typeOfUser = localStorage.getItem('typeOfUser');
 
     if(!token) {
         return { token: null, loggedUserId: null, typeOfUser: null};

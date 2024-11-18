@@ -1,26 +1,34 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
-import Home from "./pages/Home";
-import Users, {loader as usersLoader} from "./pages/Users";
-import Login from "./pages/Login";
-import EditUser from "./pages/EditUser";
-import EditPlace from "./pages/EditPlace";
-import Places, {loader as placesLoader} from './pages/Places';
-import CreateAccount from './pages/CreateAccount'
+// Padrões
 import RootLayout from './pages/Root';
+import Home from "./pages/Home";
 import ErrorPage from './pages/Error';
+
+//Users
+import Users, {loader as usersLoader} from "./pages/Users";
+import EditUser from "./pages/EditUser";
+import CreateAccount from './pages/CreateAccount'
+import Login from "./pages/Login";
 import UserDetail, {
   loader as userDetailLoader,
   action as deleteUserAction
 } from './pages/UserDetail';
+import { action as authAction } from './pages/Login';
+import { globalLoader, checkAuthLoader } from './util/auth';
+import { action as logoutAction } from './pages/Logout';
+import { action as manipulateUserAction } from './components/UserForm'; 
+
+// Locais
+import Places, {loader as placesLoader} from './pages/Places';
+import EditPlace from "./pages/EditPlace";
 import PlaceDetail, {
   loader as placeDetailLoader,
   action as deletePlaceAction
 } from './pages/PlaceDetail';
-import { action as manipulateUserAction } from './components/UserForm'; 
-import { action as authAction } from './pages/Login';
-import { globalLoader, checkAuthLoader } from './util/auth';
-import { action as logoutAction } from './pages/Logout';
+import CreatePlace from './pages/CreatePlace';
+import { action as manipulatePlaceAction } from './components/PlaceForm';
+
 
 import './App.css'
 
@@ -60,15 +68,13 @@ const router = createBrowserRouter([
             loader: placeDetailLoader,
             children: [
               {index: true, element: <PlaceDetail />, action: deletePlaceAction},
-              {path: 'edit', element: <EditPlace />}
+              {path: 'edit', element: <EditPlace />, loader: checkAuthLoader, action: manipulatePlaceAction},
             ]
-          }
+          },
+          {path: 'new', element: <CreatePlace />, loader: checkAuthLoader, action: manipulatePlaceAction},
         ] 
       },
-      {
-        path: 'logout',
-        action: logoutAction,
-      },
+      {path: 'logout', action: logoutAction},
     ]
   }
 ]);
@@ -76,7 +82,7 @@ const router = createBrowserRouter([
 function App() {
 
   return ( 
-      <RouterProvider router={router} />
+    <RouterProvider router={router} />
   )
 }
 

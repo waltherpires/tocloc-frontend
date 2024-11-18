@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function Table({ columns, data = [], clickDelete, filter = ""}){
+export default function Table({ columns, data = [], filter = ""}){
   // Filtrando linhas da tabela
   const filteredData = data.filter((element) => {
     if (filter === ""){

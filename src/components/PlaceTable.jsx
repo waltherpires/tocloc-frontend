@@ -1,5 +1,4 @@
 import { useState } from "react"; 
-import { deletePlaceById } from '../../http';
 
 import Table from './Table';
 import SearchBar from './SearchBar';
@@ -16,16 +15,6 @@ export default function PlaceTable({data}){
     { label: 'Preço Hora (R$)', field: 'precoPorHora' }
   ];
 
-  async function handleRemovePlace(id){
-
-    try{
-      await deletePlaceById(id)
-      data = data.filter((place) => place.id !== id);
-    }catch(error){
-      console.log(error.message);
-    }
-  }
-
   function handleFilter(value) {
     setFilter(value.toLowerCase());
   }
@@ -34,7 +23,7 @@ export default function PlaceTable({data}){
     <>
       <Container title="Locais"> 
         <SearchBar filterChange={handleFilter}/>
-        <Table filter={filter}  columns={placesColumns} data={data} clickDelete={handleRemovePlace}/>
+        <Table filter={filter}  columns={placesColumns} data={data} />
       </Container>
     </>
   )

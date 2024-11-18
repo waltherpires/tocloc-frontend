@@ -3,8 +3,7 @@ import {
     json, 
     Link, 
     redirect, 
-    useSubmit,
-    useParams 
+    useSubmit
 } from "react-router-dom"
 
 import Container from "../components/Container"
