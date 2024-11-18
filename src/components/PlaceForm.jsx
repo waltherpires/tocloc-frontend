@@ -7,8 +7,10 @@ export default function PlaceForm({title , method, place }){
     const submit = useSubmit();
     const { loggedUserId } = useRouteLoaderData('root');
 
-    if(place.proprietario.id !== loggedUserId){
-        submit(null, {action: '/logout', method: 'post'});
+    if(method === "PUT"){
+        if(place.proprietario.id !== loggedUserId){
+            submit(null, {action: '/logout', method: 'post'});
+        }
     }
 
     const navigation = useNavigation();

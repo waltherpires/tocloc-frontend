@@ -12,12 +12,14 @@ export default function UserForm({title , method, user }){
   const submit = useSubmit();
   const navigation = useNavigation();
 
-  const { loggedUserId } = useRouteLoaderData('root');
+  if(method === "PUT"){
+    const { loggedUserId } = useRouteLoaderData('root');
 
-  if(user.id !== loggedUserId){
+    if(user.id !== loggedUserId){
       submit(null, {action: '/logout', method: 'post'});
   }
-
+  }
+  
     const isSubmitting = navigation.state === 'submitting';
 
     return (

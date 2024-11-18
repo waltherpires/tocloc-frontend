@@ -9,7 +9,7 @@ import {
 import Container from "../components/Container"
 
 export default function PlaceDetail(){
-    const { loggedUserId } = useRouteLoaderData('root');
+    const { loggedUserId, typeOfUser } = useRouteLoaderData('root');
 
     const submit = useSubmit();
     const data = useRouteLoaderData('place-detail');
@@ -59,6 +59,12 @@ export default function PlaceDetail(){
                             <button className="bg-red-500 hover:bg-red-700 text-white w-16 p-2 text-center text-xs sm:text-sm md:text-base font-bold  rounded" onClick={startDeleteHandler}>Excluir</button>
                         </div>
                     }
+                    {typeOfUser === "USUARIO" &&
+                        <div className="flex flex-col md:flex-row gap-2 items-center">
+                             <button className="bg-red-500 hover:bg-red-700 text-white w-16 p-2 text-center text-xs sm:text-sm md:text-base font-bold  rounded" onClick={startDeleteHandler}>Reservar Local</button>
+                        </div>
+                    }
+
                 </div>
 
             </Container>

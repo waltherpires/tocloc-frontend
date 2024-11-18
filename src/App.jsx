@@ -28,7 +28,7 @@ import PlaceDetail, {
 } from './pages/PlaceDetail';
 import CreatePlace from './pages/CreatePlace';
 import { action as manipulatePlaceAction } from './components/PlaceForm';
-
+import MyPlaces, { loader as myPlacesLoader } from './pages/MyPlaces';
 
 import './App.css'
 
@@ -71,6 +71,7 @@ const router = createBrowserRouter([
               {path: 'edit', element: <EditPlace />, loader: checkAuthLoader, action: manipulatePlaceAction},
             ]
           },
+          {path: 'meuslocais', element: <MyPlaces />, loader: myPlacesLoader},
           {path: 'new', element: <CreatePlace />, loader: checkAuthLoader, action: manipulatePlaceAction},
         ] 
       },

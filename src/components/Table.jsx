@@ -64,6 +64,5 @@ export default function Table({ columns, data = [], filter = ""}){
           )}
         </tbody>
       </table>
-  )
-  
+  ) 
 }

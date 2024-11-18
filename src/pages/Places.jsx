@@ -7,7 +7,7 @@ export default function Places(){
 
   return (
     <div className="flex items-center justify-center h-[90vh]">
-      <PlaceTable data={data} />
+      <PlaceTable title="Locais" data={data} />
     </div>
   )
 }

@@ -16,6 +16,10 @@ export default function UserDetail(){
         }
     }
 
+    const typeOfUserToLowerCase = 
+        data.typeOfUser === "ANFITRIAO" ? "Anfitrião" :
+            data.typeOfUser === "USUARIO" ? "Usuário" :"Visitante";
+
     return (
         <div className="flex justify-center items-center h-[100vh]">
             <Container title="Dados do Usuário">
@@ -37,7 +41,7 @@ export default function UserDetail(){
                         </div>
                         <div className="bg-[#F0F0F0] px-2 rounded">
                             <h1 className="font-logo bg-[#262626] px-2 my-1 rounded text-white text-center">Tipo de Usuário</h1>
-                            <p className="text-center">{data.typeOfUser}</p>
+                            <p className="text-center">{typeOfUserToLowerCase}</p>
                         </div>
                     </div>
 
