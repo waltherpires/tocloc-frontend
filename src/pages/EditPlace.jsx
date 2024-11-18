@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Form } from "react-router-dom";
 
 import Input from '../components/Input';
 
@@ -8,7 +8,7 @@ export default function EditPlace(){
   return (
     <>
       <div className="overflow-auto flex justify-center items-center h-[100vh]"> 
-          <form className="w-1/3 min-w-60 p-2 shadow-lg bg-white rounded-md" onSubmit={handleSubmit}> 
+          <Form className="w-1/3 min-w-60 p-2 shadow-lg bg-white rounded-md" onSubmit={handleSubmit}> 
             <h1 className="text-sm sm:text-base md:text-xl block text-center font-semibold"><i className="fa fa-compass mx-2" aria-hidden="true"></i>Editar Local</h1>
             <hr className="mt-2"/>
             <Input 
@@ -54,7 +54,7 @@ export default function EditPlace(){
             <div className="mt-2">
               <button type="submit" className="border-2 py-1 rounded-md w-full font-semibold bg-neutral-500 text-white hover:bg-neutral-900">Salvar</button>
             </div>
-          </form>
+          </Form>
         </div>
     </>
     

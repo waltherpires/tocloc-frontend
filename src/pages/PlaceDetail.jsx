@@ -3,12 +3,15 @@ import {
     json, 
     Link, 
     redirect, 
-    useSubmit 
+    useSubmit,
+    useParams 
 } from "react-router-dom"
 
 import Container from "../components/Container"
 
 export default function PlaceDetail(){
+    const { loggedUserId } = useRouteLoaderData('root');
+
     const submit = useSubmit();
     const data = useRouteLoaderData('place-detail');
 
@@ -28,33 +31,35 @@ export default function PlaceDetail(){
                     {/* Campos */}
                     <div className="flex flex-col gap-2 md:flex-row">
                         <div className="bg-[#F0F0F0] px-2 rounded">
-                            <h1 className="font-logo bg-[#262626] px-2 my-1 md:text-3xl rounded text-white text-center">Endereço</h1>
-                            <p className="text-center text-2xl">{data.endereco}</p>
+                            <h1 className="font-logo bg-[#262626] px-2 my-1 rounded text-white text-center">Endereço</h1>
+                            <p className="text-center">{data.endereco}</p>
                         </div>
                         <div className="bg-[#F0F0F0] px-2 rounded">
-                            <h1 className="font-logo bg-[#262626] px-2 my-1 md:text-3xl rounded text-white text-center">Tipo de Espaço</h1>
-                            <p className="text-center text-2xl">{data.tipoEspaco}</p>
+                            <h1 className="font-logo bg-[#262626] px-2 my-1 rounded text-white text-center">Tipo de Espaço</h1>
+                            <p className="text-center">{data.tipoEspaco}</p>
                         </div>
                         <div className="bg-[#F0F0F0] px-2 rounded">
-                            <h1 className="font-logo bg-[#262626] px-2 my-1 md:text-3xl rounded text-white text-center">Capacidade</h1>
-                            <p className="text-center text-2xl">{data.capacidade}</p>
+                            <h1 className="font-logo bg-[#262626] px-2 my-1 rounded text-white text-center">Capacidade</h1>
+                            <p className="text-center">{data.capacidade}</p>
                         </div>
                         <div className="bg-[#F0F0F0] px-2 rounded">
-                            <h1 className="font-logo bg-[#262626] px-2 my-1 md:text-3xl rounded text-white text-center">Preço por Hora (R$)</h1>
-                            <p className="text-center text-2xl ">{data.precoPorHora}</p>
+                            <h1 className="font-logo bg-[#262626] px-2 my-1 rounded text-white text-center">Preço por Hora (R$)</h1>
+                            <p className="text-center">{data.precoPorHora}</p>
                         </div>
                         <div className="bg-[#F0F0F0] px-2 rounded">
-                            <h1 className="font-logo bg-[#262626] px-2 my-1 md:text-3xl rounded text-white text-center">Proprietário</h1>
-                            <p className="text-center text-2xl">{data.proprietario.name}</p>
+                            <h1 className="font-logo bg-[#262626] px-2 my-1 rounded text-white text-center">Proprietário</h1>
+                            <p className="text-center">{data.proprietario.name}</p>
                         </div>
                     </div>
 
                     {/* Botoes */}
-                    <div className="flex flex-col md:flex-row gap-2 items-center">
-                        <Link className="bg-yellow-500 hover:bg-yellow-700 text-white w-16 md:w-32 p-2 text-center text-xs md:text-2xl font-bold  rounded" to="edit" relative="path">Editar</Link>
-                        {/* Fazer */}
-                        <button className="bg-red-500 hover:bg-red-700 text-white w-16 md:w-32  p-2 text-center text-xs md:text-2xl font-bold  rounded" onClick={startDeleteHandler}>Excluir</button>
-                    </div>
+                    {loggedUserId == data.proprietario.id &&
+                        <div className="flex flex-col md:flex-row gap-2 items-center">
+                            <Link className="bg-yellow-500 hover:bg-yellow-700 text-white w-16 p-2 text-center text-xs sm:text-sm md:text-base font-bold  rounded" to="edit" relative="path">Editar</Link>
+                            {/* Fazer */}
+                            <button className="bg-red-500 hover:bg-red-700 text-white w-16 p-2 text-center text-xs sm:text-sm md:text-base font-bold  rounded" onClick={startDeleteHandler}>Excluir</button>
+                        </div>
+                    }
                 </div>
 
             </Container>

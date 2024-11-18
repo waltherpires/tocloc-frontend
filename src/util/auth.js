@@ -25,11 +25,11 @@ export function getAuthToken() {
 
 export function globalLoader(){
     const token = localStorage.getItem('token');
-    const userId = localStorage.getItem('userId');
+    const loggedUserId = localStorage.getItem('userId');
     const typeOfUser = localStorage.getItem('typeOfuser');
 
     if(!token) {
-        return { token: null, userId: null, typeOfUser: null};
+        return { token: null, loggedUserId: null, typeOfUser: null};
     }
 
     const tokenDuration = getTokenDuration();
@@ -38,10 +38,10 @@ export function globalLoader(){
       localStorage.removeItem('userId');
       localStorage.removeItem('typeOfUser');
       localStorage.removeItem('expiration');
-      return { token: 'EXPIRED', userId: null, typeOfUser: null };
+      return { token: 'EXPIRED', loggedUserId: null, typeOfUser: null };
     }
 
-    return { token, userId, typeOfUser };
+    return { token, loggedUserId, typeOfUser };
 }
 
 export function checkAuthLoader() {

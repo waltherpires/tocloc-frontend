@@ -3,7 +3,7 @@ import { Link, useRouteLoaderData, Form } from "react-router-dom";
 import { IoMdMenu, IoMdClose } from "react-icons/io";
 
 export default function Header(){
-    const { token, userId, typeOfuser } = useRouteLoaderData('root');
+    const { token, loggedUserId, typeOfuser } = useRouteLoaderData('root');
 
     const [iconMenu, setIconMenu] = useState(true);
 
@@ -41,7 +41,7 @@ export default function Header(){
                         }
 
                         {token &&
-                            <li className="hover:text-gray-500 cursor-pointer" onClick={onToggleMenu} ><Link to={`/users/${userId}`}>Meu Perfil</Link></li>
+                            <li className="hover:text-gray-500 cursor-pointer" onClick={onToggleMenu} ><Link to={`/users/${loggedUserId}`}>Meu Perfil</Link></li>
                         }
                     </ul>
                 </div>
