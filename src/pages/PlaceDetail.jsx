@@ -61,7 +61,7 @@ export default function PlaceDetail(){
                     }
                     {typeOfUser === "USUARIO" &&
                         <div className="flex flex-col md:flex-row gap-2 items-center">
-                             <button className="bg-red-500 hover:bg-red-700 text-white w-16 p-2 text-center text-xs sm:text-sm md:text-base font-bold  rounded" onClick={startDeleteHandler}>Reservar Local</button>
+                             <button className="bg-red-500 hover:bg-red-700 text-white max-w-25 min-w-20 p-2 text-center text-xs sm:text-sm md:text-base font-bold  rounded" onClick={startDeleteHandler}>Reservar Local</button>
                         </div>
                     }
 

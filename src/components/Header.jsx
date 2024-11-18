@@ -4,6 +4,7 @@ import { IoMdMenu, IoMdClose } from "react-icons/io";
 
 export default function Header(){
     const { token, loggedUserId, typeOfUser } = useRouteLoaderData('root');
+    console.log({ token, loggedUserId, typeOfUser });
 
     const [iconMenu, setIconMenu] = useState(true);
 
@@ -29,19 +30,19 @@ export default function Header(){
                 <div className={listClass}>
                     <ul className="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
                         <li className="hover:text-gray-500 cursor-pointer" onClick={onToggleMenu}><Link to="/">Home</Link></li>
+
+                        <li className="hover:text-gray-500 cursor-pointer" onClick={onToggleMenu} ><Link to='/locais'>Locais</Link></li>
                 
-                        {token &&
+                        {token && typeOfUser === "USUARIO" && 
                         <li className="hover:text-gray-500 cursor-pointer" onClick={onToggleMenu} ><Link to="/">Minhas Reservas</Link></li>
                         }
 
-                        <li className="hover:text-gray-500 cursor-pointer" onClick={onToggleMenu} ><Link to='/locais'>Locais</Link></li>
-
                         {token && typeOfUser === "ANFITRIAO" &&
-                            <li className="hover:text-gray-500 cursor-pointer" onClick={onToggleMenu} ><Link to='/locais/meuslocais'>Meus locais</Link></li>
+                        <li className="hover:text-gray-500 cursor-pointer" onClick={onToggleMenu} ><Link to='/locais/meuslocais'>Meus locais</Link></li>
                         }
 
                         {token &&
-                            <li className="hover:text-gray-500 cursor-pointer" onClick={onToggleMenu} ><Link to={`/users/${loggedUserId}`}>Meu Perfil</Link></li>
+                        <li className="hover:text-gray-500 cursor-pointer" onClick={onToggleMenu} ><Link to={`/users/${loggedUserId}`}>Meu Perfil</Link></li>
                         }
                     </ul>
                 </div>

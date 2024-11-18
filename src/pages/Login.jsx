@@ -80,7 +80,7 @@ export async function action({request}) {
 
   const userId = await getCurrentId(token);
 
-  getCurrentUser(userId, token);
+  await getCurrentUser(userId, token);
 
   return redirect('/users/' + userId);
 }
