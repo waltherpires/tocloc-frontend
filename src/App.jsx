@@ -18,6 +18,9 @@ import PlaceDetail, {
   action as deletePlaceAction
 } from './pages/PlaceDetail';
 import { action as manipulateUserAction } from './components/UserForm'; 
+import { action as authAction } from './pages/Login';
+import { globalLoader, checkAuthLoader } from './util/auth';
+import { action as logoutAction } from './pages/Logout';
 
 import './App.css'
 
@@ -26,6 +29,8 @@ const router = createBrowserRouter([
     path: '/',
     element: <RootLayout />,
     errorElement: <ErrorPage />,
+    id: 'root',
+    loader: globalLoader,
     children: [
       {index: true, element: <Home /> },
       {
@@ -38,13 +43,13 @@ const router = createBrowserRouter([
             loader: userDetailLoader,
             children: [
               {index: true, element: <UserDetail />, action: deleteUserAction},
-              {path: 'edit', element: <EditUser />, action: manipulateUserAction},
+              {path: 'edit', element: <EditUser />, loader: checkAuthLoader, action: manipulateUserAction},
             ]
           },
           {path: 'new', element: <CreateAccount />, action: manipulateUserAction}
         ]
       },
-      {path: 'login', element: <Login /> },
+      {path: 'login', element: <Login />, action: authAction },
       {
         path: 'locais',
         children: [
@@ -59,7 +64,11 @@ const router = createBrowserRouter([
             ]
           }
         ] 
-      }
+      },
+      {
+        path: 'logout',
+        action: logoutAction,
+      },
     ]
   }
 ]);

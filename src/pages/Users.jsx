@@ -1,6 +1,7 @@
 import {  json, useLoaderData } from 'react-router-dom'
 
 import UserTable from "../components/UserTable";
+import { getAuthToken } from '../util/auth';
 
 export default function Users() {
     const data = useLoaderData();
@@ -13,8 +14,15 @@ export default function Users() {
 }
 
 export async function loader() {
-    const response = await fetch('http://localhost:8080/users');
 
+    const token = getAuthToken();
+    const response = await fetch('http://localhost:8080/users', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        }
+    });
 
     if(!response.ok){
         throw json({ message: "Erro ao tentar obter usuários"}, {status: 500})

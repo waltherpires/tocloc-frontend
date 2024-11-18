@@ -1,8 +1,5 @@
 import { useNavigate } from "react-router-dom";
 
-
-
-
 import Input from '../components/Input';
 
 export default function EditPlace(){

@@ -5,6 +5,8 @@ import {
   json } from "react-router-dom"
 
 import Input from "./Input"
+import { getAuthToken } from "../util/auth";
+import { action as logoutAction } from '../pages/Logout';
 
 export default function UserForm({title , method, user }){
     const navigation = useNavigation();
@@ -47,7 +49,7 @@ export default function UserForm({title , method, user }){
         <Input
           required
           label="Telefone"
-          name="telefone" 
+          name="phoneNumber" 
           id="telefone" 
           defaultValue={user ? user.phoneNumber : ''}
           placeholder="Digite seu telefone..."
@@ -60,11 +62,12 @@ export default function UserForm({title , method, user }){
           <label className="block text-xs sm:text-sm md:text-base mb-1 md:mb-2">Tipo de Usuário</label>
           <select 
             name="typeOfUser" 
+            defaultValue={user ? user.typeOfUser : 'USUARIO'}
             className="border w-full text-xs sm:text-sm px-2 py-1 focus:outline-none focus:ring-0 focus:border-gray-600"
           > 
-            <option value="locador">Locador</option>
-            <option value="locatario">Locatário</option>
-            <option value="administrador">Administrador</option>
+            <option value="ANFITRIAO">Anfitrião</option>
+            <option value="VISITANTE">Visitante</option>
+            <option value="USUARIO">Usuário</option>
           </select>
         </div>
 
@@ -88,22 +91,30 @@ export async function action({request, params}) {
     name: data.get('name'),
     password: data.get('password'),
     email: data.get('email'),
-    phoneNumber: data.get('telefone'),
+    phoneNumber: data.get('phoneNumber'),
     typeOfUser: data.get('typeOfUser'),
   }
 
   let url = 'http://localhost:8080/users';
 
-  if(method == 'PUT'){
-    const userId = params.userId;
+  let headers = {
+    'Content-Type' : 'application/json',
+  } 
+
+  if(method === 'PUT'){
+    const token = getAuthToken();
+    const userId = params.userId
     url = 'http://localhost:8080/users/' + userId;
+
+    headers = { 
+      ...headers, 
+      'Authorization' : `Bearer ${token}` 
+    };
   }
 
   const response = await fetch(url, {
     method: method,
-    headers: {
-      'Content-Type': 'application/json'
-    },
+    headers: headers,
     body: JSON.stringify(userData)
   });
 
@@ -115,5 +126,9 @@ export async function action({request, params}) {
     throw json({message: "Não foi possível salvar o usuário"}, {status: 500})
   }
 
-  return redirect('/users')
+  if(method === 'PUT'){
+    logoutAction();
+  }
+
+  return redirect('/')
 }

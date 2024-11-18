@@ -3,6 +3,7 @@ import { useRouteLoaderData } from "react-router-dom";
 import UserForm from "../components/UserForm";
 
 export default function EditUser(){
+
   const data = useRouteLoaderData('user-detail');
 
   return (

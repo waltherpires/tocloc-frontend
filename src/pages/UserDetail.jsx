@@ -1,6 +1,8 @@
 import { useRouteLoaderData, json, Link, redirect, useSubmit } from "react-router-dom"
 
 import Container from "../components/Container"
+import { getAuthToken } from '../util/auth';
+import { action as logoutAction } from '../pages/Logout';
 
 export default function UserDetail(){
     const submit = useSubmit();
@@ -52,8 +54,15 @@ export default function UserDetail(){
 
 export async function loader({params}){
     const userId = params.userId;
+    const token = getAuthToken();
 
-    const response = await fetch('http://localhost:8080/users/' + userId);
+    const response = await fetch('http://localhost:8080/users/' + userId,{
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+    });
 
     if(!response.ok){
         throw json(
@@ -71,8 +80,13 @@ export async function loader({params}){
 export async function action({params, request}){
     const userId = params.userId;
 
+    const token = getAuthToken();
     const response = await fetch('http://localhost:8080/users/' + userId, {
         method: request.method,
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + token
+        }
     })
 
     if(!response.ok){
@@ -82,7 +96,11 @@ export async function action({params, request}){
         )
     }
 
-    return redirect('/users');
+    if(request.method === 'DELETE'){
+        logoutAction();
+    }
+
+    return redirect('/');
 }
 
 

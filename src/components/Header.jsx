@@ -1,15 +1,16 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useRouteLoaderData, Form } from "react-router-dom";
 import { IoMdMenu, IoMdClose } from "react-icons/io";
 
 export default function Header(){
+    const { token, userId, typeOfuser } = useRouteLoaderData('root');
+
     const [iconMenu, setIconMenu] = useState(true);
 
     let listClass = "md:static duration-500 md:top-[100%] absolute bg-[#F0F0F0] md:min-h-fit min-h-[60vh] left-0  md:w-auto w-full flex items-center px-5"
 
     function onToggleMenu(){
         setIconMenu(prevIcon => !prevIcon);
-
     }
 
     if(iconMenu){
@@ -28,14 +29,33 @@ export default function Header(){
                 <div className={listClass}>
                     <ul className="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
                         <li className="hover:text-gray-500 cursor-pointer" onClick={onToggleMenu}><Link to="/">Home</Link></li>
-                        <li className="hover:text-gray-500 cursor-pointer" onClick={onToggleMenu} ><Link to="/">Reservas</Link></li>
+                
+                        {token &&
+                        <li className="hover:text-gray-500 cursor-pointer" onClick={onToggleMenu} ><Link to="/">Minhas Reservas</Link></li>
+                        }
+
                         <li className="hover:text-gray-500 cursor-pointer" onClick={onToggleMenu} ><Link to='/locais'>Locais</Link></li>
-                        <li className="hover:text-gray-500 cursor-pointer" onClick={onToggleMenu} ><Link to="/users">Usuários</Link></li>
+
+                        {token && typeOfuser === "ANFITRIAO" &&
+                            <li className="hover:text-gray-500 cursor-pointer" onClick={onToggleMenu} ><Link to='/locais'>Meus locais</Link></li>
+                        }
+
+                        {token &&
+                            <li className="hover:text-gray-500 cursor-pointer" onClick={onToggleMenu} ><Link to={`/users/${userId}`}>Meu Perfil</Link></li>
+                        }
                     </ul>
                 </div>
                 <div className="flex items-center gap-4">
-                    <Link className="px-5 py-2 rounded-full bg-neutral-500 text-white hover:bg-neutral-900" to="login">Entrar</Link>
-                    
+                    {!token &&
+                        <Link className="px-5 py-2 rounded-full bg-neutral-500 text-white hover:bg-neutral-900" to="/login">
+                        Entrar
+                        </Link>
+                    }
+                    {token &&
+                        <Form action="/logout" method="post">
+                        <button className="px-5 py-2 rounded-full bg-neutral-500 text-white hover:bg-neutral-900">Sair</button>
+                        </Form>
+                    }
                     {iconMenu && <IoMdMenu onClick={onToggleMenu} className="text-3xl cursor-pointer md:hidden"/>}
                     {!iconMenu && <IoMdClose onClick={onToggleMenu} className="text-3xl cursor-pointer md:hidden"/>}
                 </div>
