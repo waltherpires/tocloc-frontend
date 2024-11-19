@@ -4,7 +4,6 @@ import { IoMdMenu, IoMdClose } from "react-icons/io";
 
 export default function Header(){
     const { token, loggedUserId, typeOfUser } = useRouteLoaderData('root');
-    console.log({ token, loggedUserId, typeOfUser });
 
     const [iconMenu, setIconMenu] = useState(true);
 
