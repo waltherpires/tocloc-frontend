@@ -33,7 +33,7 @@ export default function Header(){
                         <li className="hover:text-gray-500 cursor-pointer" onClick={onToggleMenu} ><Link to='/locais'>Locais</Link></li>
                 
                         {token && typeOfUser === "USUARIO" && 
-                        <li className="hover:text-gray-500 cursor-pointer" onClick={onToggleMenu} ><Link to="/">Minhas Reservas</Link></li>
+                        <li className="hover:text-gray-500 cursor-pointer" onClick={onToggleMenu} ><Link to="/users/myreservations">Minhas Reservas</Link></li>
                         }
 
                         {token && typeOfUser === "ANFITRIAO" &&

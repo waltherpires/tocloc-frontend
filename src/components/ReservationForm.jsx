@@ -23,9 +23,11 @@ export default function PlaceForm({title , method, placeId }){
 
             <Input type="datetime-local" label="Data/Hora" id="reservationtime" name="reservationtime" defaultValue={now} min={now} max={maxDate}/>
 
+            <Input label="Duração" type="number" min={1} id="duration" name="duration" defaultValue={1}/>
+
             <div className="mt-2">
                 <button className="border-2 py-1 rounded-md w-full font-semibold bg-neutral-500 text-white hover:bg-neutral-900" disabled={isSubmitting}>
-                    { isSubmitting ? 'Enviando...' : 'Salvar' }
+                    { isSubmitting ? 'Enviando...' : 'Reservar' }
                 </button>
             </div>
         </Form>
@@ -34,7 +36,6 @@ export default function PlaceForm({title , method, placeId }){
 
 export async function action({request}){
     const data = await request.formData();
-    console.log("Form Data: ", data);
     const { token, typeOfUser, loggedUserId } = globalLoader();
 
     if(!typeOfUser || typeOfUser === "VISITANTE" ) {
@@ -43,7 +44,8 @@ export async function action({request}){
 
     const reservationData = {
         localId: data.get("placeid"),
-        reservationTime: data.get("reservationtime")
+        reservationTime: data.get("reservationtime"),
+        durationHours: data.get("duration")
     }
 
     let url = 'http://localhost:8080/reservas/create/' + loggedUserId;

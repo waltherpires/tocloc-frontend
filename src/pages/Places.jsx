@@ -21,3 +21,4 @@ export async function loader() {
     const data = response.json();
     return data;
 }
+

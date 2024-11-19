@@ -34,6 +34,7 @@ import {action as createReservationAction } from './components/ReservationForm';
 
 import './App.css'
 import CreateReservation from './pages/CreateReservation';
+import MyReservations, {loader as myReservationsLoader } from './pages/MyReservations';
 
 const router = createBrowserRouter([
   {
@@ -55,10 +56,10 @@ const router = createBrowserRouter([
             children: [
               {index: true, element: <UserDetail />, action: deleteUserAction},
               {path: 'edit', element: <EditUser />, loader: checkAuthLoader, action: manipulateUserAction},
-              // {path: 'myreservations', element: <}
             ]
           },
-          {path: 'new', element: <CreateAccount />, action: manipulateUserAction}
+          {path: 'new', element: <CreateAccount />, action: manipulateUserAction},
+          {path: 'myreservations', element: <MyReservations />, loader: myReservationsLoader}
         ]
       },
       {path: 'login', element: <Login />, action: authAction },

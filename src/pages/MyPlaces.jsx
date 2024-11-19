@@ -1,4 +1,4 @@
-import {  json, useLoaderData, Link } from 'react-router-dom'
+import {  json, useLoaderData } from 'react-router-dom'
 
 import PlaceTable from "../components/PlaceTable";
 import { globalLoader } from '../util/auth';
