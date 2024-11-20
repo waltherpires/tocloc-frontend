@@ -28,13 +28,13 @@ export default function Header(){
                 </div>
                 <div className={listClass}>
                     <ul className="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
-                        <li className="hover:text-gray-500 cursor-pointer" onClick={onToggleMenu}><Link to="/">Home</Link></li>
+                        {!token && <li className="hover:text-gray-500 cursor-pointer" onClick={onToggleMenu}><Link to="/">Home</Link></li>}
 
                         <li className="hover:text-gray-500 cursor-pointer" onClick={onToggleMenu} ><Link to='/locais'>Locais</Link></li>
                 
-                        {token && typeOfUser === "USUARIO" && 
+                        {/* {token && typeOfUser === "USUARIO" && 
                         <li className="hover:text-gray-500 cursor-pointer" onClick={onToggleMenu} ><Link to="/users/myreservations">Minhas Reservas</Link></li>
-                        }
+                        } */}
 
                         {token && typeOfUser === "ANFITRIAO" &&
                         <li className="hover:text-gray-500 cursor-pointer" onClick={onToggleMenu} ><Link to='/locais/meuslocais'>Meus locais</Link></li>

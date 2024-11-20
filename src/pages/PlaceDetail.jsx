@@ -65,6 +65,12 @@ export default function PlaceDetail(){
                         </div>
                     }
 
+                    {
+                        <div className="flex flex-col md:flex-row gap-2 items-center">
+                            <Link className="bg-gray-500 hover:bg-gray-700 text-white max-w-25 min-w-20 p-2 text-center text-xs sm:text-sm md:text-base font-bold  rounded" to="reservations">Ver Reservas</Link>
+                        </div>
+                    }
+
                 </div>
 
             </Container>
