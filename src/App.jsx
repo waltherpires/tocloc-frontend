@@ -31,6 +31,10 @@ import { action as manipulatePlaceAction } from './components/PlaceForm';
 import MyPlaces, { loader as myPlacesLoader } from './pages/MyPlaces';
 
 import {action as createReservationAction } from './components/ReservationForm';
+import ReservationDetail, {
+  loader as reservationDetailLoader,
+  action as deleteReservationAction,
+} from './pages/ReservationDetail';
 
 import './App.css'
 import CreateReservation from './pages/CreateReservation';
@@ -74,7 +78,13 @@ const router = createBrowserRouter([
               {index: true, element: <PlaceDetail />, action: placeAction},
               {path: 'edit', element: <EditPlace />, loader: checkAuthLoader, action: manipulatePlaceAction},
               {path: 'newreservation', element: <CreateReservation />, action: createReservationAction},
-              {path: 'reservations', element: <PlaceReservations />, loader: placeReservationsLoader}
+              {
+                path: 'reservations',      
+                children: [
+                  {index: true, element: <PlaceReservations />, loader: placeReservationsLoader,},
+                  {path: ':reservationId', id:"reservation-detail", element: <ReservationDetail />, loader: reservationDetailLoader, action: deleteReservationAction}
+                ]
+              }
             ]
           },
           {path: 'meuslocais', element: <MyPlaces />, loader: myPlacesLoader},

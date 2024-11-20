@@ -1,24 +1,28 @@
+import { useEffect } from 'react'
+
 import { 
   Form, 
   useNavigation, 
   redirect, 
-  json, useSubmit, useRouteLoaderData } from "react-router-dom"
+  json, useRouteLoaderData, 
+  useNavigate} from "react-router-dom"
 
 import Input from "./Input"
-import { getAuthToken } from "../util/auth";
+import { globalLoader } from "../util/auth";
 import { action as logoutAction } from '../pages/Logout';
 
 export default function UserForm({title , method, user }){
-  const submit = useSubmit();
   const navigation = useNavigation();
+  const navigate = useNavigate();
+  const { loggedUserId } = useRouteLoaderData('root');
 
-  if(method === "PUT"){
-    const { loggedUserId } = useRouteLoaderData('root');
+  useEffect(() => {
 
-    if(user.id !== loggedUserId){
-      submit(null, {action: '/logout', method: 'post'});
-  }
-  }
+    if (method === "PUT" && user.id != loggedUserId) {
+      navigate('/');
+    }
+
+  }, [method, user, loggedUserId]);
   
     const isSubmitting = navigation.state === 'submitting';
 
@@ -111,9 +115,8 @@ export async function action({request, params}) {
   } 
 
   if(method === 'PUT'){
-    const token = getAuthToken();
-    const userId = params.userId
-    url = 'http://localhost:8080/users/' + userId;
+    const { token, loggedUserId } = globalLoader()
+    url = 'http://localhost:8080/users/' + loggedUserId;
 
     headers = { 
       ...headers, 

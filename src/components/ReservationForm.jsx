@@ -69,5 +69,5 @@ export async function action({request, params}){
         throw json({message: responseData.message || "Não foi possível salvar os dados da reserva"}, {status: 500})
     }
 
-    return redirect('/')
+    return redirect('/locais/' + placeId + "/reservations");
 }

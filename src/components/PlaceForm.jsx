@@ -1,17 +1,20 @@
-import { Form, json, redirect, useNavigation, useRouteLoaderData, useSubmit } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Form, json, redirect, useNavigate, useNavigation, useRouteLoaderData, useSubmit } from 'react-router-dom';
 
 import Input from './Input';
 import { globalLoader } from '../util/auth';
 
 export default function PlaceForm({title , method, place }){
-    const submit = useSubmit();
+    const navigate = useNavigate();
     const { loggedUserId } = useRouteLoaderData('root');
 
-    if(method === "PUT"){
-        if(place.proprietario.id !== loggedUserId){
-            submit(null, {action: '/logout', method: 'post'});
+
+    useEffect(() => {
+        if (method === "PUT" && place.proprietario.id != loggedUserId) {
+            navigate('/');
         }
-    }
+    }, [method, place, loggedUserId]);
+
 
     const navigation = useNavigation();
 

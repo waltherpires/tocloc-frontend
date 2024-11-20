@@ -26,7 +26,7 @@ export async function loader({params}){
     });
 
     if(!response.ok){
-        throw json({ message: "Erro ao tentar obter reservas deste local"}, {status: 500})
+        throw json({ message: "Erro ao tentar obter reservas deste local!"}, {status: 500})
     }
 
     const placeReservations = await response.json();

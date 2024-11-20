@@ -5,5 +5,5 @@ export function action(){
     localStorage.removeItem('expiration');
     localStorage.removeItem('userId');
     localStorage.removeItem('typeOfUser');
-    return redirect('/login');
+    return redirect('/');
 }

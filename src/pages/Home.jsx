@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom"
 
+import HomeBackground from "../assets/images/home-background.jpg";
+
 export default function Home(){
     return (
         <div className="
             flex
             min-h-screen 
-            bg-[url('images/home-background.jpg')] 
             items-center
             justify-center
             bg-center 
@@ -13,6 +14,9 @@ export default function Home(){
             w-full
             sm:justify-start
             "
+            style= {{
+                backgroundImage: `url(${HomeBackground})`,
+            }}
         >
 
             <div className='
@@ -21,7 +25,7 @@ export default function Home(){
                 sm:flex-row
                 text-white 
                 m-10 
-                p-4 
+                p-6 
                 rounded 
                 bg-gradient-to-br 
                 from-black
