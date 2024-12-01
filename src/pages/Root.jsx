@@ -31,13 +31,13 @@ export default function RootLayout() {
 
     return (
         <>
-        <Header />
-        <Modal open={navigation.state === "loading"}>
-            {navigation.state === "loading" && <MessagePage title="Carregando..." message="Carregando os dados" />}
-        </Modal>
-        <main>
-            <Outlet />
-        </main>
+            <Header />
+            <Modal open={navigation.state === "loading"}>
+                {navigation.state === "loading" && <MessagePage title="Carregando..." message="Carregando os dados" />}
+            </Modal>
+            <main>
+                <Outlet />
+            </main>
         </>
     )
 }

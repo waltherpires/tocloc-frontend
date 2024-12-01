@@ -115,7 +115,7 @@ export async function action({request, params}){
             throw json({ message: "ID do local não encontrado"}, {status: 400});
         }
 
-        if(loggedUserId )
+        if(loggedUserId)
         url = 'http://localhost:8080/locais/' + placeId;
     }
 

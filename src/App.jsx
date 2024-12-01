@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import './App.css'
 
 // Padrões
 import RootLayout from './pages/Root';
@@ -6,16 +7,15 @@ import Home from "./pages/Home";
 import ErrorPage from './pages/Error';
 
 //Users
+import { globalLoader, checkAuthLoader } from './util/auth';
 import Users, {loader as usersLoader} from "./pages/Users";
 import EditUser from "./pages/EditUser";
 import CreateAccount from './pages/CreateAccount'
-import Login from "./pages/Login";
+import Login,  { action as authAction } from "./pages/Login";
 import UserDetail, {
   loader as userDetailLoader,
   action as deleteUserAction
 } from './pages/UserDetail';
-import { action as authAction } from './pages/Login';
-import { globalLoader, checkAuthLoader } from './util/auth';
 import { action as logoutAction } from './pages/Logout';
 import { action as manipulateUserAction } from './components/UserForm'; 
 
@@ -36,7 +36,6 @@ import ReservationDetail, {
   action as deleteReservationAction,
 } from './pages/ReservationDetail';
 
-import './App.css'
 import CreateReservation from './pages/CreateReservation';
 import PlaceReservations, {loader as placeReservationsLoader } from './pages/PlaceReservations';
 

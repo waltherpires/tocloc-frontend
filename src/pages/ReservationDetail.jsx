@@ -6,8 +6,8 @@ import { globalLoader } from '../util/auth';
 export default function ReservationDetail() {
 
     const data = useLoaderData();
+    console.log(data);
     const { loggedUserId } = globalLoader();
-
 
     return (
         <div className="flex justify-center items-center h-[100vh]">
@@ -35,6 +35,12 @@ export default function ReservationDetail() {
                             <h1 className="font-logo bg-[#262626] px-2 my-1 rounded text-white text-center">Locatário</h1>
                             <p className="text-center">{data.usuario.name}</p>
                         </div>
+                        {data.checkinConfirmado &&
+                            <div className="bg-[#F0F0F0] px-2 rounded">
+                                <h1 className="font-logo bg-[#262626] px-2 my-1 rounded text-white text-center">Checkin</h1>
+                                <p className="text-center">Confirmado</p>
+                            </div>
+                        }
                     </div>
 
                     {/* Botões */}
@@ -46,6 +52,14 @@ export default function ReservationDetail() {
                                     Excluir
                                 </button>
                             </Form>
+                        }
+                        {data.usuario.id == loggedUserId && !data.checkinConfirmado &&
+                            <Form method="patch">
+                                <button className="bg-green-500 hover:bg-green-700 text-white w-20 p-2 text-center text-xs sm:text-sm md:text-base font-bold rounded"
+                                >
+                                    Checkin
+                                </button>
+                             </Form>
                         }
                     </div>
                 </div>
@@ -85,10 +99,18 @@ export async function loader({ params }) {
 
 export async function action({ params, request }) {
     const { reservationId, placeId } = params;
+    console.log("Place ID:", placeId, "Reservation ID:", reservationId);
     const { token } = globalLoader();
+    const method = request.method;
 
-    const response = await fetch(`http://localhost:8080/locais/${placeId}/reservas/${reservationId}`, {
-        method: request.method,
+    let url = `http://localhost:8080/locais/${placeId}/reservas/${reservationId}`
+
+    if(method === "PATCH"){
+        url += "/checkin";
+    }
+
+    const response = await fetch(url, {
+        method: method,
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
@@ -96,8 +118,17 @@ export async function action({ params, request }) {
     });
 
     if (!response.ok) {
-        throw json({ message: "Erro ao deletar reserva!" }, { status: 500 });
+        const errorMessage = 
+            method === "DELETE"
+                ? "Erro ao deletar reserva!"
+                : "Erro ao realizar check-in!";
+
+        throw json({ message: errorMessage }, { status: response.status });
     }
 
-    return redirect('/locais');
+    if (method === "DELETE") {
+        return redirect('/locais');
+    }
+
+    return null;
 }

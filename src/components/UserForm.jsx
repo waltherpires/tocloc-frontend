@@ -79,7 +79,6 @@ export default function UserForm({title , method, user }){
             className="border w-full text-xs sm:text-sm px-2 py-1 focus:outline-none focus:ring-0 focus:border-gray-600"
           > 
             <option value="ANFITRIAO">Anfitrião</option>
-            <option value="VISITANTE">Visitante</option>
             <option value="USUARIO">Usuário</option>
           </select>
         </div>

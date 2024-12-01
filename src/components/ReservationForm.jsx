@@ -12,8 +12,9 @@ export default function PlaceForm({title , method }){
     let maxDate = new Date(now);
     maxDate.setMonth(maxDate.getMonth() + 2);
 
-    now = now.toISOString().slice(0, 16);
-    maxDate = maxDate.toISOString().slice(0,16);
+    const timezoneOffset = now.getTimezoneOffset() * 60000;
+    now = new Date(now.getTime() - timezoneOffset).toISOString().slice(0, 16);
+    maxDate = new Date(maxDate.getTime() - timezoneOffset).toISOString().slice(0, 16);
 
     return (
         <Form method={method} className="w-1/3 min-w-60 p-2 shadow-lg bg-white rounded-md" > 
